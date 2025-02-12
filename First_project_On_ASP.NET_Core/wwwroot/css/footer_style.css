@@ -1,0 +1,51 @@
+﻿* {
+    margin: 0px;
+    padding: 0;
+}
+
+/* Загальні стилі */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: #ffffff;
+   
+}
+
+
+
+
+/* Footer */
+footer {
+    width: 100%;
+    height: auto;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
+}
+
+    footer p {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+
+    footer a {
+        color: #f1c40f;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+        footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}

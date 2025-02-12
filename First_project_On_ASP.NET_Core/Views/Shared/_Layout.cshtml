@@ -4,10 +4,53 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href= "~/css/bootstrap.min.css.map" rel ="stylesheet " tyte = "text/css" />
+
+    <link href= "~/css/main_style.css" rel ="stylesheet " tyte = "text/css" />
+    <link href= "~/css/footer_style.css" rel ="stylesheet " tyte = "text/css" />
+    <link href= "~/css/header_style.css" rel ="stylesheet " tyte = "text/css" />
+    
+      
 </head>
 <body>
-    <div>
+    
+    <header>
+    
+      
+        
+
+        <ul class="nav">
+          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+
+        <form class="search" role="search">
+          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-outline-light me-2">Login</button>
+          <button type="button" class="btn btn-warning">Sign-up</button>
+        </div>
+      
+   
+  </header>
+
+    <main>
         @RenderBody()
-    </div>
+    </main>
+
+ <footer class="container"> 
+
+    <p><a href="#">Back to top</a> </p> 
+    <p>© 2017–2024 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p> 
+    
+
+  </footer> 
+
+    <script src ="~/js/bootstrap.min.js.map"></script>
 </body>
 </html>
