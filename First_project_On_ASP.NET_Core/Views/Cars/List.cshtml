@@ -1,13 +1,14 @@
 ﻿
-@* <h1>Всі автомобілі</h1> *@
-@* <h3>@Model.currCategory</h3> *@
-@* @{ *@
-@*     foreach(var car in Model.allCars) *@
-@*     { *@
-@*         <div> *@
-@*             <h2> Модель: @car.name</h2> *@
-@*             <p2>Ціна: @car.price.ToString("c")</p2> *@
+<h1>Всі автомобілі</h1> 
+<h3>@Model.currCategory</h3> 
+ @{ 
+     foreach(var car in Model.allCars) 
+     { 
+        <div class="content">
+                    <img width="70%" src="@car.img"/>
+            <h2> Модель: @car.name</h2> 
+            <p2>Ціна: @car.price.ToString("c")</p2> 
 
-@*         </div> *@
-@*     } *@
-@*     } *@
+        </div> 
+    } 
+    }

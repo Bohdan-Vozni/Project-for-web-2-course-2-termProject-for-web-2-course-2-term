@@ -16,7 +16,7 @@ namespace Shop.Data.mocks
                 {
                     name = "Tesla",
                     shortDesc = "", 
-                    img = "/img/teslamodel3",
+                    img = "/img/teslavodel3.jpg",
                     price = 4500,
                     isFavourite = true,
                     category = _CategoryCars.AllCegories.First() 
@@ -25,8 +25,48 @@ namespace Shop.Data.mocks
                 yield return new Car 
                 {
                     name = "Audi",
-                    shortDesc = "/img/audi",
-                    img = "",
+                    shortDesc = "",
+                    img = "/img/audirs7.jpg",
+                    price = 2500,
+                    isFavourite = true,
+                    category = _CategoryCars.AllCegories.Last() 
+                };
+
+                yield return new Car 
+                {
+                    name = "Audi",
+                    shortDesc = "",
+                    img = "/img/audirs7.jpg",
+                    price = 2500,
+                    isFavourite = true,
+                    category = _CategoryCars.AllCegories.Last() 
+                };
+
+                yield return new Car 
+                {
+                    name = "Audi",
+                    shortDesc = "",
+                    img = "/img/audirs7.jpg",
+                    price = 2500,
+                    isFavourite = true,
+                    category = _CategoryCars.AllCegories.Last() 
+                };
+
+                yield return new Car 
+                {
+                    name = "Audi",
+                    shortDesc = "",
+                    img = "/img/audirs7.jpg",
+                    price = 2500,
+                    isFavourite = true,
+                    category = _CategoryCars.AllCegories.Last() 
+                };
+
+                yield return new Car 
+                {
+                    name = "Audi",
+                    shortDesc = "",
+                    img = "/img/audirs7.jpg",
                     price = 2500,
                     isFavourite = true,
                     category = _CategoryCars.AllCegories.Last() 

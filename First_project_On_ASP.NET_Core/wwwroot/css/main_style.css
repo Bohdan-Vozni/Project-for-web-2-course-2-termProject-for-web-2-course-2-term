@@ -1,5 +1,25 @@
 ﻿main {
     height: 10000px;
     width: 100%;
+    padding-top: 120px;
+
+    
+}
+
+main h1 {
+    
+}
+
+
+.content {
+    width: 362px;
+    height: 350px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 30px;
+    border: 2px solid black;
+    float: left;
+    margin: 30px;
+    padding: 40px;
+    text-align: center;
 
 }
