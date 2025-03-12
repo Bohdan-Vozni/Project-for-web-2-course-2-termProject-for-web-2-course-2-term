@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Data;
 
@@ -11,9 +12,11 @@ using Shop.Data;
 namespace Shop.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20250312131709_Order")]
+    partial class Order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,9 +98,7 @@ namespace Shop.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("orderTime")
                         .HasColumnType("datetime2");
@@ -147,18 +148,18 @@ namespace Shop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<int>("CarID")
-                        .HasColumnType("int");
-
                     b.Property<string>("ShopCartId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("carid")
+                        .HasColumnType("int");
 
                     b.Property<int>("price")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("CarID");
+                    b.HasIndex("carid");
 
                     b.ToTable("ShopCartItem");
                 });
@@ -197,9 +198,7 @@ namespace Shop.Migrations
                 {
                     b.HasOne("Shop.Data.Models.Car", "car")
                         .WithMany()
-                        .HasForeignKey("CarID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("carid");
 
                     b.Navigation("car");
                 });

@@ -1,10 +1,11 @@
-﻿
-<h1>Всі автомобілі</h1> 
-<h3>@Model.currCategory</h3> 
+﻿@model HomeViewModel
+
+
+<h1>Кращі автомобілі</h1> 
 
 <div class= "row mt-5 mb-2">
     @{ 
-        foreach (Car car in Model.allCars)
+        foreach (Car car in Model.favCars)
         {
             @Html.Partial("Allcars", car)
 

@@ -14,6 +14,7 @@ using Shop.Data.mocks;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data.Repository;
 using Shop.Data.Repository;
+using Shop.Data.Models;
 
 namespace Shop
 {
@@ -32,7 +33,17 @@ namespace Shop
             services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
             services.AddTransient <IAllCars, CarRepository>();
             services.AddTransient <ICarsCategory, CategoryRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShopCart.GetCart(sp));
+
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddMemoryCache();
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,8 +52,16 @@ namespace Shop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseSession();
+            //app.UseMvcWithDefaultRoute();
 
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "categoryFilter", template: "Car/{action}/{category?}", defaults: new { Controller = "Car", action = "List" });
+
+
+            });
             
             using (var scope = app.ApplicationServices.CreateScope())
             {

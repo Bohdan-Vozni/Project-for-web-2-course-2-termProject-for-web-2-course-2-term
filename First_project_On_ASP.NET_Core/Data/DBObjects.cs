@@ -33,6 +33,16 @@ namespace Shop.Data
                     isFavourite = true,
                     category = Categories["Електромобіль"]
                 },
+                
+                new Car
+                {
+                    name = "Tesla",
+                    shortDesc = "",
+                    img = "/img/teslavodel3.jpg",
+                    price = 4500,
+                    isFavourite = true,
+                    category = Categories["Електромобіль"]
+                },
 
                 new Car
                 {
