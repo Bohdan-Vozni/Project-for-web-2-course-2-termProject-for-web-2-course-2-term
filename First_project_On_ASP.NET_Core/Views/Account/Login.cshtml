@@ -1,0 +1,18 @@
+﻿<!-- Views/Account/Login.cshtml -->
+@model User
+
+<h2>Вхід</h2>
+
+<form asp-action="Login" method="post">
+    <div>
+        <label asp-for="login"></label>
+        <input asp-for="login" />
+        <span asp-validation-for="login" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="password"></label>
+        <input asp-for="password" type="password" />
+        <span asp-validation-for="password" class="text-danger"></span>
+    </div>
+    <button type="submit">Увійти</button>
+</form>

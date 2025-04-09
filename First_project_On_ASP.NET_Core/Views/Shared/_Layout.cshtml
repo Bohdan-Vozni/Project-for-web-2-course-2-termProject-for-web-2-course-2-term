@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -9,32 +10,56 @@
     <link href= "~/css/main_style.css" rel ="stylesheet " tyte = "text/css" />
     <link href= "~/css/footer_style.css" rel ="stylesheet " tyte = "text/css" />
     <link href= "~/css/header_style.css" rel ="stylesheet " tyte = "text/css" />
-    
-      
+
+
 </head>
 <body>
-    
+
     <header>
-    
-      
-        
+
+
+
 
         <ul class="nav">
-          <li><a asp-controller="Home" asp-action="Index" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="/ShopCart" class="nav-link px-2 text-white">Корзина</a></li>
-          <li><a href="/Cars/List" class="nav-link px-2 text-white">Всі машини</a></li>
-          <li><a href="/Cars/List/electro" class="nav-link px-2 text-white">Електро</a></li>
-          <li><a href="/Cars/List/fuel" class="nav-link px-2 text-white">Бензинові</a></li>
-          
+            <li><a asp-controller="Home" asp-action="Index" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="/ShopCart" class="nav-link px-2 text-white">Корзина</a></li>
+            <li><a href="/Cars/List" class="nav-link px-2 text-white">Всі машини</a></li>
+            <li><a href="/Cars/List/electro" class="nav-link px-2 text-white">Електро</a></li>
+            <li><a href="/Cars/List/fuel" class="nav-link px-2 text-white">Бензинові</a></li>
+
         </ul>
 
         <form class="search" role="search">
-          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
         </form>
 
+        @{
+            var user = Context.Session.GetString("User");
+        }
+
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+            @if (user != null && !string.IsNullOrEmpty(user))
+            {
+                <form asp-action="Login" asp-controller="Account" method = "Get">  @* // замінити  Login на особиснтий кабінет *@
+                    <button type="submit" class="btn btn-outline-light me-2" >Особистий кабінет</button>
+                </form>
+
+                <form asp-action="Logout" asp-controller="Account" >
+                     <button type="submit" class="btn btn-warning">Вийти</button>
+                </form>  
+            }
+            else
+            {
+                 <form asp-action="Login" asp-controller="Account" method = "Get">
+                    <button type="submit" class="btn btn-outline-light me-2" >Login</button>
+                </form>
+
+                <form asp-action="Login" asp-controller="Account" method = "Get">
+                     <button type="submit" class="btn btn-warning">Sign-up</button>
+                </form>  
+            }
+                   
+         
         </div>
       
    
