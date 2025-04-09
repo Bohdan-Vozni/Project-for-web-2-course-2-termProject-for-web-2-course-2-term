@@ -6,13 +6,13 @@
 <form asp-action="Login" method="post">
     <div>
         <label asp-for="login"></label>
-        <input asp-for="login" />
+        <input asp-for="login" class ="form-control"/>
         <span asp-validation-for="login" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="password"></label>
-        <input asp-for="password" type="password" />
+        <input asp-for="password" type="password" class ="form-control"/>
         <span asp-validation-for="password" class="text-danger"></span>
     </div>
-    <button type="submit">Увійти</button>
+    <button type="submit" class ="btn">Увійти</button>
 </form>

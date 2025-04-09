@@ -40,7 +40,7 @@
         <div class="text-end">
             @if (user != null && !string.IsNullOrEmpty(user))
             {
-                <form asp-action="Login" asp-controller="Account" method = "Get">  @* // замінити  Login на особиснтий кабінет *@
+                <form asp-action="Personal_Account" asp-controller="Dashboard" method = "Get"> 
                     <button type="submit" class="btn btn-outline-light me-2" >Особистий кабінет</button>
                 </form>
 
@@ -54,7 +54,7 @@
                     <button type="submit" class="btn btn-outline-light me-2" >Login</button>
                 </form>
 
-                <form asp-action="Login" asp-controller="Account" method = "Get">
+                <form asp-action="Login" asp-controller="Account" method = "Get"> @* // замінити  Login на вхід на реєстрацію *@
                      <button type="submit" class="btn btn-warning">Sign-up</button>
                 </form>  
             }

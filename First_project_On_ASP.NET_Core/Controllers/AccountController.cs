@@ -32,7 +32,7 @@ namespace Shop.Controllers
                 if (user != null)
                 {
                     HttpContext.Session.SetString("User", user.name);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");  
                 }
 
                 ModelState.AddModelError("", "Error with login or password");

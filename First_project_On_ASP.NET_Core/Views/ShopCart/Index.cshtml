@@ -10,6 +10,11 @@
 		</div>
 	}
 	<hr />
-	<a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">оплатити</a>
-    
+	<div>
+		<form  asp-controller="Order" asp-action="Checkout">
+			<button type = "submit"class = "btn">оплатити</button>
+		</form>
+	</div>
+	@* <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">оплатити</a> *@
+
 </div>

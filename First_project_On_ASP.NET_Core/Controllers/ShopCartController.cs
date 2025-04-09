@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Shop.Data.interfaces;
 using Shop.Data.Models;
 using Shop.Data.Repository;
@@ -18,8 +19,13 @@ namespace Shop.Controllers
             _shopCart = shopCart;
         }
 
-        public ViewResult Index()
+        public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("User") == null)
+            {
+                return RedirectToAction("Login","Account");
+            }
+
             var items = _shopCart.getShopItems();
             _shopCart.listShopItems = items;
 
@@ -33,6 +39,12 @@ namespace Shop.Controllers
 
         public RedirectToActionResult addToCart (int id )
         {
+
+            if (HttpContext.Session.GetString("User") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var item = _carRep.Cars.FirstOrDefault(i => i.id == i.id);
             if (item != null)
             {
