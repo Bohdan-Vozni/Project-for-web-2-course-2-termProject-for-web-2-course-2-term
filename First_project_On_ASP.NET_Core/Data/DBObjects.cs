@@ -13,12 +13,21 @@ namespace Shop.Data
 {
     public class DBObjects
     {
-        public static void Initial (AppDBContent content)
-        {           
+        public static void Initial(AppDBContent content)
+        {
+            if(content.User.Any())
+            {
+               // content.User.
+            }
+
+            if (!content.User.Any())
+            {
+                content.User.AddRange(Users.Select(c => c.Value));
+            }
 
             if (!content.Category.Any())
             {
-                content.Category.AddRange(Categories.Select( c => c.Value));
+                content.Category.AddRange(Categories.Select(c => c.Value));
             }
 
             if (!content.Car.Any())
@@ -33,7 +42,7 @@ namespace Shop.Data
                     isFavourite = true,
                     category = Categories["Електромобіль"]
                 },
-                
+
                 new Car
                 {
                     name = "Tesla",
@@ -52,7 +61,7 @@ namespace Shop.Data
                     price = 2500,
                     isFavourite = true,
                     category = Categories["класичний автомобіль"]
-                }               
+                }
                     );
             }
 
@@ -74,7 +83,7 @@ namespace Shop.Data
                     };
 
                     category = new Dictionary<string, Category>();
-                    
+
                     foreach (var el in list)
                     {
                         category.Add(el.categoryName, el);
@@ -85,5 +94,30 @@ namespace Shop.Data
             }
         }
 
+        public static Dictionary<string, User> user;
+
+        public static Dictionary<string, User> Users
+        {
+            get
+            {
+                if ( user == null)
+                {
+                    var list = new User[]
+                    {
+                        new User { name = "Bohdan", surname = "Vozni", middlName = "Oleksandrovuch", age = 18, phoneNumber = "0960849073", email = "daster708@ukr.net", login = "Bohdan", password = "Bohdan", isAdmin = false},
+                        new User { name = "Bohdan", surname = "Vozni", middlName = "Oleksandrovuch", age = 18, phoneNumber = "0960849073", email = "daster708@ukr.net", login = "sa", password = "sa", isAdmin = true}
+                    };
+
+                    user = new Dictionary<string, User>();
+
+                    foreach (var el in list)
+                    {
+                        user.Add(el.login, el);
+                    }
+                }
+                return user;
+            }
+            
+        }
     }
 }
