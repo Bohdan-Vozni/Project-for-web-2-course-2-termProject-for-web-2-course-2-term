@@ -1,16 +1,16 @@
-﻿* {
+﻿/** {
     margin: 0px;
     padding: 0;
-}
+}*/
 
 /* Загальні стилі */
 
-body {
+/*body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
     color: #ffffff;
    
-}
+}*/
 
 
 
@@ -18,25 +18,22 @@ body {
 /* Footer */
 footer {
     width: 100%;
-    height: auto;
     background: rgba(0, 0, 0, 0.7);
     color: white;
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px 10px; /* Зменшуємо відступи */
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
 }
 
-    footer p {
-        margin: 10px 0;
-        font-size: 16px;
-    }
+footer p {
+    margin: 5px 0; /* Зменшуємо відступи між текстом */
+    font-size: 14px; /* Зменшуємо розмір шрифту для тексту */
+}
 
-    footer a {
-        color: #f1c40f;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
+footer a {
+    font-size: 14px; /* Зменшуємо розмір шрифту для посилань */
+}
+
 
         footer a:hover {
             color: #ffffff;

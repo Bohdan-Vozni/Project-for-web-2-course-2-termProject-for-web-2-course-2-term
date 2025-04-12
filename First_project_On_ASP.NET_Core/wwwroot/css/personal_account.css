@@ -1,0 +1,115 @@
+﻿
+.containerPersonalAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    
+}
+
+
+/* Стилі блоку з деталями */
+.account-container {
+
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+/* Заголовок */
+.account-header {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #333;
+    position: relative;
+}
+
+    .account-header::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #007bff;
+        margin: 10px auto 0;
+        border-radius: 3px;
+    }
+
+/* Деталі користувача */
+.user-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #555;
+}
+
+    .user-detail label {
+        font-weight: 600;
+        color: #222;
+    }
+
+    .user-detail span {
+        font-style: italic;
+    }
+
+/* Кнопки */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.btnPersonalAccount {
+    flex: 1;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .btnPersonalAccount:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+/* Анімація з'явлення */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивність */
+@media (max-width: 600px) {
+    .account-container {
+        padding: 25px 20px;
+    }
+
+    .user-detail {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btnPersonalAccount {
+        width: 100%;
+    }
+}

@@ -1,67 +1,68 @@
 ﻿@model User
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Деталі користувача</title>
-</head>
-<body>
 
-    <h2>Деталі користувача</h2>
 
-    <div>
-        <label>Ім'я: </label>
-        <span>@Model.name</span>
+
+
+<div class="containerPersonalAccount">
+     <link rel="stylesheet" href="~/css/Personal_Account.css">
+     <div class="account-container">
+     <div>
+         <title>Деталі користувача</title> 
+     </div>
+      
+    
+        <h2 class="account-header">Деталі користувача</h2>
+
+        <div class="user-detail">
+            <label>Ім'я:</label>
+            <span>@Model.name</span>
+        </div>
+
+        <div class="user-detail">
+            <label>Прізвище:</label>
+            <span>@Model.surname</span>
+        </div>
+
+        <div class="user-detail">
+            <label>По батькові:</label>
+            <span>@Model.middlName</span>
+        </div>
+
+        <div class="user-detail">
+            <label>Вік:</label>
+            <span>@Model.age</span>
+        </div>
+
+        <div class="user-detail">
+            <label>Номер телефону:</label>
+            <span>@Model.phoneNumber</span>
+        </div>
+
+        <div class="user-detail">
+            <label>Електронна пошта:</label>
+            <span>@Model.email</span>
+        </div>
+
+        <div class="user-detail">
+            <label>Логін:</label>
+            <span>@Model.login</span>
+        </div>
+
+        <div class="user-detail">
+            <label>Адмін:</label>
+            <span>@(Model.isAdmin ? "Так" : "Ні")</span>
+        </div>
+
+        <div class="action-buttons">
+            <form asp-action="Edit" asp-controller="Account"> 
+                <button type="submit" class="btn btnPersonalAccount">Редагувати</button>
+            </form>
+
+            <form asp-action="Logout" asp-controller="Account"> 
+                <button type="submit" class="btn btnPersonalAccount">Вийти</button>
+            </form>
+        </div>
     </div>
 
-    <div>
-        <label>Прізвище: </label>
-        <span>@Model.surname</span>
-    </div>
-
-    <div>
-        <label>По батькові: </label>
-        <span>@Model.middlName</span>
-    </div>
-
-    <div>
-        <label>Вік: </label>
-        <span>@Model.age</span>
-    </div>
-
-    <div>
-        <label>Номер телефону: </label>
-        <span>@Model.phoneNumber</span>
-    </div>
-
-    <div>
-        <label>Електронна пошта: </label>
-        <span>@Model.email</span>
-    </div>
-
-    <div>
-        <label>Логін: </label>
-        <span>@Model.login</span>
-    </div>
-
-    <div>
-        <label>Адмін: </label>
-        <span>@(Model.isAdmin ? "Так" : "Ні")</span>
-    </div>
-
-    <div>
-        <form asp-action="Edit" asp-controller="Account"> 
-            <button type = "submit" class ="btn">Редагувати</button>
-        </form>
-
-        <form asp-action="Logout" asp-controller="Account"> 
-            <button type = "submit" class ="btn">Вийти</button>
-        </form>
-
-        @* <a href="@Url.Action("Edit", "Account", new { id = Model.id })">Редагувати</a>
-        <a href="@Url.Action("Logout", "Account")">Вийти</a> *@
-    </div>
-
-</body>
-</html>
+</div>

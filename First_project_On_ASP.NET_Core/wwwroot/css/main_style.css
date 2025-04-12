@@ -1,25 +1,35 @@
-﻿main {
-    height: 10000px;
-    width: 100%;
-    padding-top: 120px;
-
-    
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* Вимикає горизонтальний скрол */
+    flex-direction: column;
 }
 
-main h1 {
-    
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column; /* Додаємо гнучку структуру */
 }
 
+main {
+    flex-grow: 1; /* Головний контейнер займає решту простору */
+    padding-top: 120px; /* Відступ під хедер */
+    overflow-y: auto; /* Додає вертикальний скрол */
+}
 
 .content {
-    width: 362px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
     height: 350px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 30px;
     border: 2px solid black;
-    float: left;
     margin: 30px;
     padding: 40px;
     text-align: center;
-
+    display: inline-block;
 }
