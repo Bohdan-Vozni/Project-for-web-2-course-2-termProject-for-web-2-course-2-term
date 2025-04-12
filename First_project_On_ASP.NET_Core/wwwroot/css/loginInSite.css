@@ -72,6 +72,9 @@ button.btnLogin {
     
 }
 
+.text-danger {
+    color: palevioletred;
+}
 /* Анімації */
 @keyframes fadeInUp {
     from {

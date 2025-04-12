@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Data;
 using Shop.Data.Models;
+using Shop.ViewModels;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
@@ -58,9 +59,15 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUP(User user)
+        public IActionResult SignUP(UserViewModel user)
         {
-            if (ModelState.IsValid )
+            var availableUser = content.User.FirstOrDefault(u => u.login == user.login);
+            if (availableUser != null)
+            {
+                ModelState.AddModelError("login", "Даний користувач існує з таким логіном");
+            }
+
+            if (ModelState.IsValid && availableUser == null )
             {
                 // Обробка збереження користувача або інших операцій
 
@@ -68,6 +75,7 @@ namespace Shop.Controllers
                 DBObjects.UserWriteToDBRecordOFSignUp(content);
                 return RedirectToAction("Login", "Account");
             }
+           
             return View(user);
 
         }

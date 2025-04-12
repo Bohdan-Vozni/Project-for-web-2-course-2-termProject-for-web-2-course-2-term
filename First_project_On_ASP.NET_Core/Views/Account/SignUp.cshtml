@@ -1,20 +1,20 @@
-﻿@model User
+﻿@model UserViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
 
 
 <link rel="stylesheet" href="~/css/loginInSite.css" type="text/css"/>
-<link rel="js" href="wwwroot\js\AuditForPassword.js"/>
+
 
 <div class="login-container">
     <div class="login-box">
 
         <h2>Реєстрація</h2>
-        <form asp-action="SignUp" asp-controller="Account" method="Post">
-            <label asp-for="login">Логін</label>
-            <div class="form-group">
-
+        <form asp-action="SignUp" asp-controller="Account" method="Post" id="signupForm">
+            
+         <div class="form-group">
+             <label asp-for="login">Логін</label>
             <input asp-for="login" class="form-control form-controlLogin" placeholder="Введіть ваш логін" />
             <span asp-validation-for="login" class="text-danger"></span>
         </div>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="phoneNumber">Номер телефону</label>
+            <label asp-for="phoneNumber">Номер телефону не співпадає</label>
             <input asp-for="phoneNumber" class="form-control form-controlLogin" placeholder="Введіть ваш телефон"/>
             <span asp-validation-for="phoneNumber" class="text-danger"></span>
         </div>
@@ -79,3 +79,4 @@
     </div>
 </div>
 
+<script src="~/js/AuditForPassword.js"></script>
