@@ -67,6 +67,7 @@ namespace Shop
             {
                 AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
                 DBObjects.Initial(content);
+                DBObjects.UserWriteToDBRecordOFSignUp(content);
             }
 
             

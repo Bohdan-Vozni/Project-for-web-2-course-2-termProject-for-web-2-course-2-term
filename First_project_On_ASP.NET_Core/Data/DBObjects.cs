@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
 using Shop.Data.Models;
 using Shop.Migrations;
 using System.Collections;
@@ -11,10 +12,23 @@ using System.Linq;
 
 namespace Shop.Data
 {
-    public class DBObjects
+    public  class DBObjects 
     {
-        public static void Initial(AppDBContent content)
+        public static User userToWrite { get; set; }
+
+        public static void UserWriteToDBRecordOFSignUp(AppDBContent content)
         {
+            if (userToWrite != null)
+            {
+                content.User.Add(userToWrite);
+                content.SaveChanges();
+                userToWrite = null;
+            }
+        }
+
+        public static void Initial(AppDBContent content)
+        {           
+
             if(content.User.Any())
             {
                // content.User.

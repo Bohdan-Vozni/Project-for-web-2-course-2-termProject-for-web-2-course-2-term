@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data;
+using Shop.Data.Models;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 
 namespace Shop.Controllers
 {
@@ -17,9 +20,11 @@ namespace Shop.Controllers
 
         public IActionResult Personal_Account()
         {
-            var user = content.User.FirstOrDefault(u => u.login == "sa");
+            var getUserInfo = HttpContext.Session.GetString("User");
+            var jsonDeserializeUser = JsonSerializer.Deserialize<User>(getUserInfo);            
 
-            return View(user);
+            return View(jsonDeserializeUser);
         }
+
     }
 }

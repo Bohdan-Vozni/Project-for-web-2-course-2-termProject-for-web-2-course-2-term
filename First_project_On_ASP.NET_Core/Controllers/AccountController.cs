@@ -4,6 +4,8 @@ using Shop.Data;
 using Shop.Data.Models;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
+
 
 namespace Shop.Controllers
 {
@@ -31,7 +33,9 @@ namespace Shop.Controllers
 
                 if (user != null)
                 {
-                    HttpContext.Session.SetString("User", user.name);
+                    var jsonSerialiseUser = JsonSerializer.Serialize(user);
+                    HttpContext.Session.SetString("User", jsonSerialiseUser);
+                   
                     return RedirectToAction("Index", "Home");  
                 }
 
@@ -47,5 +51,25 @@ namespace Shop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SignUP(User user)
+        {
+            if (ModelState.IsValid )
+            {
+                // Обробка збереження користувача або інших операцій
+
+                DBObjects.userToWrite = user;
+                DBObjects.UserWriteToDBRecordOFSignUp(content);
+                return RedirectToAction("Login", "Account");
+            }
+            return View(user);
+
+        }
     }
 }

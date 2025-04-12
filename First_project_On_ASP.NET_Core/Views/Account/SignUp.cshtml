@@ -1,0 +1,81 @@
+﻿@model User
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+
+
+<link rel="stylesheet" href="~/css/loginInSite.css" type="text/css"/>
+<link rel="js" href="wwwroot\js\AuditForPassword.js"/>
+
+<div class="login-container">
+    <div class="login-box">
+
+        <h2>Реєстрація</h2>
+        <form asp-action="SignUp" asp-controller="Account" method="Post">
+            <label asp-for="login">Логін</label>
+            <div class="form-group">
+
+            <input asp-for="login" class="form-control form-controlLogin" placeholder="Введіть ваш логін" />
+            <span asp-validation-for="login" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="password">Пароль</label>
+            <input asp-for="password" type="password" class="form-control form-controlLogin" placeholder="Введіть ваш пароль" id="password"/>
+            <span asp-validation-for="password" class="text-danger"></span>
+        </div>
+
+        <!-- Поле для підтвердження пароля -->
+        <div class="form-group">
+            <label for="confirmPassword">Підтвердження пароля</label>
+            <input type="password" class="form-control form-controlLogin" id="confirmPassword" placeholder="Підтвердіть ваш пароль"/>
+            <span id="confirmPasswordError" class="text-danger" style="display: none;">Паролі не співпадають</span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="name">Ім'я</label>
+            <input asp-for="name" class="form-control form-controlLogin" placeholder="Введіть ваше ім'я"/>
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="surname">Прізвище</label>
+            <input asp-for="surname" class="form-control form-controlLogin" placeholder="Введіть ваше прізвище"/>
+            <span asp-validation-for="surname" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="middlName">По батькові</label>
+            <input asp-for="middlName" class="form-control form-controlLogin" placeholder="Введіть по батькові"/>
+            <span asp-validation-for="middlName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="age">Вік</label>
+            <input asp-for="age" class="form-control form-controlLogin" placeholder="Введіть ваш вік"/>
+            <span asp-validation-for="age" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="phoneNumber">Номер телефону</label>
+            <input asp-for="phoneNumber" class="form-control form-controlLogin" placeholder="Введіть ваш телефон"/>
+            <span asp-validation-for="phoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="email">Електронна пошта</label>
+            <input asp-for="email" class="form-control form-controlLogin" placeholder="Введіть вашу електронну пошту"/>
+            <span asp-validation-for="email" class="text-danger"></span>
+        </div>
+
+
+            <button type="submit" class="btn btnLogin">Зареєструватися</button>
+        </form>
+
+        <form asp-action="Login" asp-controller="Account" method="Get">
+            <button type="submit" class="btn btnLogin">Вхід</button>
+        </form>
+
+    </div>
+</div>
+
