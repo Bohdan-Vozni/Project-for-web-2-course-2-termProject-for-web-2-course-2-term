@@ -1,4 +1,15 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿
+
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+
+@{
+    var user = Context.Session.GetString("User");
+
+}
+
+
+
 <!DOCTYPE html>
 
 <html>
@@ -27,15 +38,31 @@
             <li><a href="/Cars/List/electro" class="nav-link px-2 text-white">Електро</a></li>
             <li><a href="/Cars/List/fuel" class="nav-link px-2 text-white">Бензинові</a></li>
 
+            @if (user != null)
+            {
+                User deserializeUser = null;
+                try
+                {
+                    deserializeUser = JsonSerializer.Deserialize<User>(user);
+                }
+                catch (JsonException ex)
+                {
+                    Console.WriteLine($"Deserialization error: {ex.Message}");
+                }
+
+                if (deserializeUser.isAdmin)
+                {
+                    <li><a href="/AdminZone/AdminHome" class="nav-link px-2 text-white">Admin</a></li>
+                }            }
+                
+
         </ul>
 
         <form class="search" role="search">
             <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
         </form>
 
-        @{
-            var user = Context.Session.GetString("User");
-        }
+       
 
         <div class="text-end">
             @if (user != null && !string.IsNullOrEmpty(user))
