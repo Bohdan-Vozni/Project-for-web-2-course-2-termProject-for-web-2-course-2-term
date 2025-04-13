@@ -2,26 +2,26 @@
 @model Shop.Data.Models.Car
 
 
-<link href="/css/addAuto_style.css" rel="stylesheet" />
+<link href="/css/ChangeInfoAuto_style.css" rel="stylesheet" />
 <link href="/css/main.css" rel="stylesheet" />
 
 <div class="form-container">
-    <h2>Додати автомобіль</h2>
+    <h2>Зміна інформації про автомобіль</h2>
 
     <form asp-action="AddAuto" method="Post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Назва автомобіля</label>
-            <input type="text" class="form-control" id="name" name="name"  required />
+            <input type="text" class="form-control" id="name" name="name" value="@Model.name" required />
         </div>
 
         <div class="form-group">
             <label for="shortDesc">Короткий опис</label>
-            <input type="text" class="form-control" id="shortDesc" name="shortDesc"  required />
+            <input type="text" class="form-control" id="shortDesc" name="shortDesc" value="@Model.shortDesc" required />
         </div>
 
         <div class="form-group">
             <label for="longDesc">Довгий опис</label>
-            <textarea class="form-control" id="longDesc" name="longDesc" rows="4" required></textarea>
+            <textarea class="form-control" id="longDesc" name="longDesc" rows="4" required>@Model.longDesc</textarea>
         </div>
 
         <div class="form-group">
@@ -31,17 +31,17 @@
 
         <div class="form-group">
             <label for="price">Ціна</label>
-            <input type="number" class="form-control" id="price" name="price" value="price" required />
+            <input type="number" class="form-control" id="price" name="price" value="@Model.price" required />
         </div>
 
         <div class="form-group checkbox-group">
             <label for="isFavourite">Вибраний</label>
-            <input type="checkbox" class="form-check-input" id="isFavourite" name="isFavourite" isFavourite ? "checked" : "" />
+            <input type="checkbox" class="form-check-input" id="isFavourite" name="isFavourite" @(Model.isFavourite ? "checked" : "") />
         </div>
 
         <div class="form-group checkbox-group">
             <label for="available">Доступний</label>
-            <input type="checkbox" class="form-check-input" id="available" name="available" available ? "checked" : "" />
+            <input type="checkbox" class="form-check-input" id="available" name="available" @(Model.available ? "checked" : "") />
         </div>
 
         <div class="form-group">
@@ -51,6 +51,6 @@
             </select>
         </div>
 
-        <button type="submit" class="btn-primary">Додати</button>
+        <button type="submit" class="v">Змінити</button>
     </form>
 </div>

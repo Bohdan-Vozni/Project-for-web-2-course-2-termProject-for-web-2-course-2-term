@@ -23,4 +23,8 @@
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\ChangeInfoAuto_style.css" />
+  </ItemGroup>
+
 </Project>
