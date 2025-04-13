@@ -45,12 +45,23 @@ namespace Shop.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var item = _carRep.Cars.FirstOrDefault(i => i.id == i.id);
+            var item = _carRep.Cars.FirstOrDefault(i => i.id == id);
             if (item != null)
             {
                 _shopCart.AddToCart(item);
             }
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult deleteTOCart(int id) 
+        {
+            var item = _carRep.Cars.FirstOrDefault(i => i.id == id);
+            if (item != null)
+            {
+                _shopCart.DeleteToCard(item);
+            }
             return RedirectToAction("Index");
         }
     }

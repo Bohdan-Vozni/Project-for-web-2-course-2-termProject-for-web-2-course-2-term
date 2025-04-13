@@ -8,6 +8,9 @@
         <div class="cart-item animate-fade-in">
             <h4>🚗 @el.car.name</h4>
             <p><strong>Ціна:</strong> @el.car.price.ToString("c")</p>
+            <form asp-action="deleteToCart" asp-controller="ShopCart" asp-route-id="@el.car.id">
+                    <button type="submit" class="btn">Видалити товар з корзини</button>
+            </form>
         </div>
     }
 

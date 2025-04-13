@@ -68,6 +68,23 @@ namespace Shop.Data.Models
             appDBContent.SaveChanges();
         }
 
+        public void DeleteToCard (Car car)
+        {
+            var item = appDBContent.ShopCartItem
+               .FirstOrDefault(i => i.ShopCartId == ShopCartId && i.CarID == car.id);
+
+            if (item != null)
+            {
+                appDBContent.ShopCartItem.Remove(item);
+                appDBContent.SaveChanges();
+            }
+
+            appDBContent.SaveChanges();
+
+           
+        }
+
+
         public List<ShopCartItem> getShopItems ()
         {
             return appDBContent.ShopCartItem.Where(c => c.ShopCartId == ShopCartId).Include(s => s.car).ToList();
