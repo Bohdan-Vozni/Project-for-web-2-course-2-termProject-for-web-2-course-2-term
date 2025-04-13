@@ -1,0 +1,79 @@
+﻿/* Загальний контейнер */
+.cart-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fdfdfd;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in;
+}
+
+/* Окрема картка з авто */
+.cart-item {
+    background-color: #fffbe6;
+    border: 2px solid #ffe58f;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255, 214, 10, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .cart-item:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(255, 214, 10, 0.3);
+    }
+
+    .cart-item h4 {
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+
+    .cart-item p {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+.divider {
+    margin: 2rem 0;
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #ffe58f, #ffa940);
+}
+
+/* Кнопка оформлення */
+.checkout-button {
+    background: linear-gradient(to right, #ff7a18, #af002d);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+    .checkout-button:hover {
+        background: linear-gradient(to right, #e85d04, #d00000);
+        transform: scale(1.05);
+    }
+
+/* Анімація при появі */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Анімація класу */
+.animate-fade-in {
+    animation: fadeIn 0.7s ease-in-out;
+}

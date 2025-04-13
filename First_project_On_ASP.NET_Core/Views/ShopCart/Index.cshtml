@@ -1,20 +1,21 @@
 ﻿@model ShopCartViewModel
 
-<div>
-	@foreach ( var el in Model.shopCart.listShopItems)
-	{
-		<div class = "alert alert-warning mt-3">
-			<b>Автомобіль:</b> @el.car.name <br />
-			<b>Ціна:</b> @el.car.price.ToString("c")
+<link rel="stylesheet" href="~/css/shop_style.css" />
 
-		</div>
-	}
-	<hr />
-	<div>
-		<form  asp-controller="Order" asp-action="Checkout" method="Post">
-			<button type = "submit"class = "btn">оплатити</button>
-		</form>
-	</div>
-	@* <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">оплатити</a> *@
+<div class="cart-container">
+    @foreach (var el in Model.shopCart.listShopItems)
+    {
+        <div class="cart-item animate-fade-in">
+            <h4>🚗 @el.car.name</h4>
+            <p><strong>Ціна:</strong> @el.car.price.ToString("c")</p>
+        </div>
+    }
 
+    <hr class="divider" />
+
+    <div class="checkout-container">
+        <form asp-controller="Order" asp-action="Checkout" method="Post">
+            <button type="submit" class="checkout-button">Оплатити</button>
+        </form>
+    </div>
 </div>
