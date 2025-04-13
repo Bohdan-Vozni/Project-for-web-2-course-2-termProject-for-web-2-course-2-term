@@ -16,7 +16,7 @@ namespace Shop.Controllers
         public ShopCartController (IAllCars carRep, ShopCart shopCart)
         {
             _carRep = carRep;
-            _shopCart = shopCart;
+            _shopCart = shopCart;  // тут автоматично викликається GetCart()
         }
 
         public IActionResult Index()

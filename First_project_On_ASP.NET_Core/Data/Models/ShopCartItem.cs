@@ -14,6 +14,6 @@ namespace Shop.Data.Models
 
         public int price { get; set; }
         public string ShopCartId { get; set; }
-
+        public User User { get; set; }
     }
 }

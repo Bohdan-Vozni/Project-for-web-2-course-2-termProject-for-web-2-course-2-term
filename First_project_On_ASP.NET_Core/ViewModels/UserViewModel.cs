@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shop.ViewModels
 {
-    public class UserViewModel : User
+    public class UserViewModel : User // успадкував для того щоб вивести в шаблоні реєстрації, додати валідації
     {
         public int id { get; set; }
 

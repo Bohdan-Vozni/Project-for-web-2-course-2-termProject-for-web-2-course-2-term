@@ -59,7 +59,7 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUP(UserViewModel user)
+        public IActionResult SignUP(User user)
         {
             var availableUser = content.User.FirstOrDefault(u => u.login == user.login);
             if (availableUser != null)
@@ -69,10 +69,17 @@ namespace Shop.Controllers
 
             if (ModelState.IsValid && availableUser == null )
             {
-                // Обробка збереження користувача або інших операцій
+                if (string.IsNullOrEmpty(user.login))
+                {
+                    ModelState.AddModelError("login", "Логін не може бути порожнім");
+                    return View(user);
+                }
 
-                DBObjects.userToWrite = user;
-                DBObjects.UserWriteToDBRecordOFSignUp(content);
+                content.User.Add(user);
+                content.SaveChanges();
+
+                //DBObjects.userToWrite = user;
+               // DBObjects.UserWriteToDBRecordOFSignUp(content);
                 return RedirectToAction("Login", "Account");
             }
            

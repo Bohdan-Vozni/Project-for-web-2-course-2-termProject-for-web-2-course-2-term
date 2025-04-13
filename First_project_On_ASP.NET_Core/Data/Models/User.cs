@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient.DataClassification;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Data.Models
@@ -34,5 +35,9 @@ namespace Shop.Data.Models
         public string password { get; set; }
 
         public bool isAdmin { get; set; }
+
+        public string ShopCartId { get; set; }
+
+        public List<ShopCartItem> ShopCartItems { get; set; }
     }
 }

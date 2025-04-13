@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
+using Shop.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 
 namespace Shop.Data.Models
 {
@@ -24,14 +27,32 @@ namespace Shop.Data.Models
         public static ShopCart GetCart(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-
             var context = services.GetService<AppDBContent>();
 
-            string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
 
-            session.SetString("CartId", shopCartId);
+            if (session.GetString("User") == null)
+            {
+                return new ShopCart(context);
+            }
 
-            return new ShopCart(context) { ShopCartId = shopCartId };
+            var userDeserialization = JsonSerializer.Deserialize<User>(session.GetString("User"));
+
+            if (userDeserialization.ShopCartId == null)
+            {
+                string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+                userDeserialization.ShopCartId = shopCartId;
+
+                session.SetString("CartId", shopCartId);
+
+                context.User.Update(userDeserialization);
+                context.SaveChanges();
+
+                return new ShopCart(context) { ShopCartId = shopCartId };
+            }
+            else
+            {                            
+                return new ShopCart(context) { ShopCartId = userDeserialization.ShopCartId };
+            }
         }
 
         public void AddToCart (Car car)
