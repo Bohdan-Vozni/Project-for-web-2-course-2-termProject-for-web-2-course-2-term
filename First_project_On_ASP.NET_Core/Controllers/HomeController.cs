@@ -21,7 +21,7 @@ namespace Shop.Controllers
         {
             var homeCars = new HomeViewModel
             { 
-                favCars = _carRep.getFavCars,
+                favCars = _carRep.getFavCars.Where(i => i.available == true),  //  && i.available == true додав щоб відображалися тільки наявні авто
             };
 
             return View(homeCars);

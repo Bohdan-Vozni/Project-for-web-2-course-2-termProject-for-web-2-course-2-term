@@ -31,22 +31,22 @@ namespace Shop.Controllers
 
             if(string.IsNullOrEmpty(category))
             {
-                cars = _allCars.Cars.OrderBy(i => i.id);
+                cars = _allCars.Cars.Where(i => i.available == true).OrderBy(i => i.id);  //  && i.available == true додав щоб відображалися тільки наявні авто
             }
             else
             {
                 if(string.Equals("electro",category,System.StringComparison.OrdinalIgnoreCase))
                 {
-                    cars = _allCars.Cars.Where(i => i.category.categoryName.Equals("Електромобіль")).OrderBy(i => i.id);
+                    cars = _allCars.Cars.Where(i => i.category.categoryName.Equals("Електромобіль") && i.available == true).OrderBy(i => i.id);
                     currCategory = "Електомобілі";
                 }
                 else if (string.Equals("fuel", category, System.StringComparison.OrdinalIgnoreCase))
                 {
-                    cars = _allCars.Cars.Where(i => i.category.categoryName.Equals("класичний автомобіль")).OrderBy(i => i.id);
+                    cars = _allCars.Cars.Where(i => i.category.categoryName.Equals("класичний автомобіль") && i.available == true).OrderBy(i => i.id);
                     currCategory = "Класичні автомобілі";
                 }
 
-               
+                //  && i.available == true додав щоб відображалися тільки наявні авто
             }
 
             var carObj = new CarsListViewModels
