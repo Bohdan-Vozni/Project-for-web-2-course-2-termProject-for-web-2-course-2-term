@@ -201,5 +201,87 @@ namespace Shop.Controllers
 
             return RedirectToAction("AdminHome");
         }
+
+
+        [HttpGet]
+        public IActionResult FindAutoForDelete()
+        {
+            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel { allCategory = _allCategories };
+            return View(AdminAddChangeAutoViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult FindAutoForDelete(AdminAddChangeAutoViewModel model)
+        {
+            if (model.Car == null)
+            {
+                model.Car = new Car();
+            }
+
+            var query = content.Car.AsQueryable();
+
+            if (!string.IsNullOrEmpty(model.Car.name))
+            {
+                query = query.Where(c => c.name == model.Car.name);
+            }
+
+            if (model.Car.price != 0)
+            {
+                query = query.Where(c => c.price == model.Car.price);
+            }
+
+            query = query.Where(c => c.available == model.Car.available);
+
+            query = query.Where(c => c.isFavourite == model.Car.isFavourite);
+
+            if (model.Car.categoryID != 0)
+            {
+                query = query.Where(c => c.categoryID == model.Car.categoryID);
+            }
+
+            var allFindCar = query.ToList();
+
+            if (allFindCar.Count == 0)
+            {
+                ModelState.AddModelError("Car.name", "Неіснує такого авто спробуйте ввести нові значення");
+            }
+
+
+            var modelReturn = new AdminAddChangeAutoViewModel
+            {
+                allCategory = _allCategories,
+                FountCars = allFindCar,
+
+            };
+
+
+            return View(modelReturn);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAuto(AdminAddChangeAutoViewModel model, int id)
+        {
+            if (model.Car == null)
+            {
+                model.Car = new Car();
+            }
+            
+            var carForRemove = content.Car.FirstOrDefault(c => c.id == id);
+
+            if (carForRemove == null)
+            {
+                ModelState.AddModelError("", "неможливо видалити"); // нігде не обробляється
+            }
+            else 
+            {
+                content.Car.Remove(carForRemove);
+                //content.SaveChanges();
+            }
+
+            model.allCategory = _allCategories;
+
+            
+            return View("FindAutoForDelete", model);
+        }
     }
 }
