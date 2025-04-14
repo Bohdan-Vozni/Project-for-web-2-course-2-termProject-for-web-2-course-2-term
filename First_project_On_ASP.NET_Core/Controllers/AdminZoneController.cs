@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Threading;
 
 namespace Shop.Controllers
@@ -81,24 +82,43 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult FindAutoForChange(AdminAddChangeAutoViewModel car)
+        public IActionResult FindAutoForChange(AdminAddChangeAutoViewModel model)
         {
-            if (car.Car == null)
+            if (model.Car == null)
             {
-                car.Car = new Car();
+                model.Car = new Car();
             }
-           
-           var allFindCar = content.Car.Where
-                (
-                 c =>
-                 c.name == car.Car.name ||
-                 c.price == car.Car.price ||
-                 c.isFavourite == car.Car.isFavourite ||
-                 c.available == car.Car.available ||
-                 c.category == car.Car.category
-                ).ToList();
 
-            var model = new AdminAddChangeAutoViewModel
+            var query = content.Car.AsQueryable();
+
+            if (!string.IsNullOrEmpty( model.Car.name))
+            {
+                query = query.Where(c => c.name == model.Car.name);
+            }
+
+            if (model.Car.price != 0)
+            {
+                query = query.Where(c => c.price == model.Car.price);
+            }
+
+            query = query.Where(c => c.available == model.Car.available);
+
+            query = query.Where(c => c.isFavourite == model.Car.isFavourite);
+
+            if (model.Car.categoryID != 0)
+            {
+                query = query.Where(c => c.categoryID == model.Car.categoryID);
+            }
+
+            var allFindCar = query.ToList();
+
+            if(allFindCar == null)
+            {
+                ModelState.AddModelError("FindAutoForChange", "Немає такого авто");
+            }
+
+
+            var modelReturn = new AdminAddChangeAutoViewModel
             { 
                allCategory = _allCategories,
                FountCars = allFindCar,
@@ -106,7 +126,7 @@ namespace Shop.Controllers
             };
 
 
-            return View(model);  //використати ViewModels
+            return View(modelReturn);  //використати ViewModels
         }
 
 

@@ -9,12 +9,13 @@
     <form asp-action="FindAutoForChange" asp-controller="AdminZone" method="Post">
         <div class="form-group">
             <label asp-for="Car.name">Назва автомобіля</label>
-            <input asp-for="Car.name" type="text" class="form-control" id="name"  required />
+            <input asp-for="Car.name" type="text" class="form-control" id="name"   />@*  required *@
+            <span asp-validation-for="Car.name" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Car.price">Ціна</label>
-            <input asp-for="Car.price" type="number" class="form-control" id="price"  required />
+            <input asp-for="Car.price" type="number" class="form-control" id="price"  />  @*  required *@
         </div>
 
         <div class="form-group checkbox-group">

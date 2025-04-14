@@ -1,10 +1,10 @@
 ﻿@model Shop.Data.Models.Car
 
-
+<link href="/css/main.css" rel="stylesheet" />
 
 <div class="content">
     
-    <img width="70%" src="@Model.img" class="img-thumbnail" alt="@Model.name"/>
+    <img src="@Model.img" class="img-thumbnail" alt="@Model.name"/>
     <h2> Модель: @Model.name</h2> 
     <p>@Model.shortDesc</p>
     <p>Ціна: @Model.price.ToString("c")</p> 
