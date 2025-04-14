@@ -21,8 +21,8 @@ main {
 }
 
 .content {
-    display: flex;
-    flex-wrap: wrap;
+    width: 400px; /* статична ширина */
+    height: auto; /* висота автоматична */
     gap: 20px;
     height: 350px;
     background: rgba(0, 0, 0, 0.7);
@@ -32,4 +32,17 @@ main {
     padding: 40px;
     text-align: center;
     display: inline-block;
+    text-align: center;
 }
+
+    .img-thumbnail {
+        width: 210px; /* фіксована ширина */
+        height: 120px; /* фіксована висота */
+        object-fit: cover; /* обрізає зображення красиво */
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+
+
+   

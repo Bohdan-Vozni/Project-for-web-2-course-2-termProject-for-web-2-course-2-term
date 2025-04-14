@@ -112,9 +112,9 @@ namespace Shop.Controllers
 
             var allFindCar = query.ToList();
 
-            if(allFindCar == null)
+            if(allFindCar.Count == 0)
             {
-                ModelState.AddModelError("FindAutoForChange", "Немає такого авто");
+                ModelState.AddModelError("Car.name", "Неіснує такого авто спробуйте ввести нові значення");
             }
 
 

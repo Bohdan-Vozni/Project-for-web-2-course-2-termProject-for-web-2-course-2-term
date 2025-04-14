@@ -1,0 +1,187 @@
+﻿/* formStyles.css */
+body {
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+main {
+    width: 100%;
+    height: auto;
+    
+}
+
+.allForm-container {
+    display: flex;
+    justify-content: center; /* по горизонталі */
+    align-items: center; /* по вертикалі */
+    height: 100vh; /* вся висота вікна */
+    
+}
+
+
+.form-container {
+    background-color: antiquewhite;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    min-height: 400px;
+    height: auto;
+    animation: fadeInScale 0.6s ease-in-out;
+    overflow: visible;
+    margin-top: 0px;
+    margin-bottom: 9px;
+}
+
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.text-danger {
+    color: darkred;
+}
+
+/*стилі для виведення інформації в foreach*/
+
+/* Додаткові стилі для знайдених авто */
+.found-cars-container {
+    margin-top: 30px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.found-car-card {
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 20px 25px;
+    width: 300px;
+    height: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideUp 0.6s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+    .found-car-card strong {
+        font-size: 20px;
+        color: #007bff;
+    }
+
+    .found-car-card form {
+        margin-top: 15px;
+    }
+
+    .found-car-card .btn {
+        background-color: #28a745;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .found-car-card .btn:hover {
+            background-color: #218838;
+        }
+
+    .found-car-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+/* Анімації */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

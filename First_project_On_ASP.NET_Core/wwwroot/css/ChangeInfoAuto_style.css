@@ -79,6 +79,10 @@ button:hover {
     background-color: #0056b3;
 }
 
+.text-danger{
+    color: red;
+}
+
 @keyframes fadeInScale {
     from {
         opacity: 0;
