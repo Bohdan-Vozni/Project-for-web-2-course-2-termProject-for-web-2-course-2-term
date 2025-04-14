@@ -1,6 +1,5 @@
 ﻿@using Shop.Data.interfaces
-@model Shop.Data.Models.Car
-
+@model AdminAddChangeAutoViewModel
 
 <link href="/css/ChangeInfoAuto_style.css" rel="stylesheet" />
 <link href="/css/main.css" rel="stylesheet" />
@@ -8,49 +7,74 @@
 <div class="form-container">
     <h2>Зміна інформації про автомобіль</h2>
 
-    <form asp-action="AddAuto" method="Post" enctype="multipart/form-data">
+    <form asp-action="ChangeInfoAuto" method="Post" enctype="multipart/form-data" asp-route-id="@Model.Car.id">
         <div class="form-group">
-            <label for="name">Назва автомобіля</label>
-            <input type="text" class="form-control" id="name" name="name" value="@Model.name" required />
+            <label asp-for="Car.name">Назва автомобіля</label>
+            <input asp-for="Car.name" type="text" class="form-control" id="name"  required />
         </div>
 
         <div class="form-group">
-            <label for="shortDesc">Короткий опис</label>
-            <input type="text" class="form-control" id="shortDesc" name="shortDesc" value="@Model.shortDesc" required />
+            <label asp-for="Car.shortDesc">Короткий опис</label>
+            <input asp-for="Car.shortDesc" type="text" class="form-control" id="shortDesc" required />
         </div>
 
         <div class="form-group">
-            <label for="longDesc">Довгий опис</label>
-            <textarea class="form-control" id="longDesc" name="longDesc" rows="4" required>@Model.longDesc</textarea>
+            <label asp-for="Car.longDesc">Довгий опис</label>
+            <textarea asp-for="Car.longDesc" class="form-control" id="longDesc" rows="4" required></textarea>
         </div>
 
         <div class="form-group">
-            <label for="img">Фото автомобіля</label>
-            <input type="file" class="form-control" id="img" name="img" />
+            <label asp-for="ImageUpload">Фото автомобіля</label>
+            <input asp-for ="ImageUpload" type ="file" class="form-control" id="img" value="@Model.Car.img"  />
+            @{
+                if(!string.IsNullOrEmpty(Model.Car.img) != null)
+                {
+                    <div>
+                        <img src="@Url.Content(Model.Car.img)" alt="Current Image" style="max-width: 200px; max-height: 200px;"/>
+                    </div>
+                }
+            }
+
         </div>
 
         <div class="form-group">
-            <label for="price">Ціна</label>
-            <input type="number" class="form-control" id="price" name="price" value="@Model.price" required />
+            <label asp-for="Car.price">Ціна</label>
+            <input asp-for="Car.price" type="number" class="form-control" id="price" value="@Model.Car.price" required />
         </div>
 
         <div class="form-group checkbox-group">
-            <label for="isFavourite">Вибраний</label>
-            <input type="checkbox" class="form-check-input" id="isFavourite" name="isFavourite" @(Model.isFavourite ? "checked" : "") />
+            <label asp-for="Car.isFavourite">Вибраний</label>
+            <input asp-for="Car.isFavourite" type="checkbox" class="form-check-input" id="isFavourite"/>  @* Car.isFavourite ? "checked" : "" /> *@
         </div>
 
         <div class="form-group checkbox-group">
-            <label for="available">Доступний</label>
-            <input type="checkbox" class="form-check-input" id="available" name="available" @(Model.available ? "checked" : "") />
+            <label asp-for="Car.available">Доступний</label>
+            <input asp-for="Car.available" type="checkbox" class="form-check-input" id="available"/>@*  available ? "checked" : "" /> *@
         </div>
 
         <div class="form-group">
             <label for="categoryID">Категорія</label>
-            <select class="form-control" id="categoryID" name="categoryID" required>
-                @* Додай категорії з ViewBag, коли треба *@
+            <select class="form-control" id="categoryID" name="Car.categoryID"  required>
+                @{
+                    foreach (var item in Model.allCategory.AllCegories)
+                    {
+                        if (item.Id == Model.Car.categoryID)
+                        {
+                        <option value="@item.Id" selected>
+                            @item.categoryName
+                        </option>
+                        }
+                        else
+                        {
+                        <option value="@item.Id">
+                            @item.categoryName
+                        </option>
+                        }
+                    }
+                }
             </select>
         </div>
 
-        <button type="submit" class="v">Змінити</button>
+        <button type="submit" class="btn-primary">Змінити</button>
     </form>
 </div>

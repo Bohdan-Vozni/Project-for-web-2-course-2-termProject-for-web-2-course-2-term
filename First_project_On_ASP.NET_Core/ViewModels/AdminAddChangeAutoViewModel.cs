@@ -13,6 +13,8 @@ namespace Shop.ViewModels
 
         public IFormFile ImageUpload { get; set; }
 
-        public Car Car { get; set; }
+        public Car Car { get; set; } = new Car();
+
+        public List<Car> FountCars { get; set; }
     }
 }

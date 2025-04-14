@@ -19,10 +19,11 @@ namespace Shop.Controllers
         private readonly IAllCars _allCars;
         private AppDBContent content;
 
-        public AdminZoneController (AppDBContent content, ICarsCategory allCategory)
+        public AdminZoneController (AppDBContent content, ICarsCategory allCategory, IAllCars allCars)
         {
             this.content = content;
             _allCategories = allCategory;
+            _allCars = allCars;
         }
         public IActionResult AdminHome()
         {
@@ -75,30 +76,110 @@ namespace Shop.Controllers
         [HttpGet]
         public IActionResult FindAutoForChange()
         {
-            return View();
+            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel { allCategory = _allCategories };
+            return View(AdminAddChangeAutoViewModel);
         }
 
         [HttpPost]
-        public IActionResult FindAutoForChange(Car car)
+        public IActionResult FindAutoForChange(AdminAddChangeAutoViewModel car)
         {
-           List<Car> allFindCar = content.Car.Where
+            if (car.Car == null)
+            {
+                car.Car = new Car();
+            }
+           
+           var allFindCar = content.Car.Where
                 (
                  c =>
-                 c.name == car.name ||
-                 c.price == car.price ||
-                 c.isFavourite == car.isFavourite ||
-                 c.available == car.available ||
-                 c.category == car.category
+                 c.name == car.Car.name ||
+                 c.price == car.Car.price ||
+                 c.isFavourite == car.Car.isFavourite ||
+                 c.available == car.Car.available ||
+                 c.category == car.Car.category
                 ).ToList();
 
-            return View(allFindCar);  //використати ViewModels
+            var model = new AdminAddChangeAutoViewModel
+            { 
+               allCategory = _allCategories,
+               FountCars = allFindCar,
+
+            };
+
+
+            return View(model);  //використати ViewModels
         }
 
 
         [HttpGet]
-        public IActionResult ChangeInfoAuto()
+        public IActionResult ChangeInfoAuto(int id)
         {
-            return View(new Car());
+            var car = content.Car.FirstOrDefault(c => c.id == id);
+
+            var model = new AdminAddChangeAutoViewModel
+            {
+                allCategory = _allCategories,
+                Car = car,
+
+            };
+            
+            if(car == null)
+            {
+                return RedirectToAction("FindAutoForChange");
+            }
+
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public IActionResult ChangeInfoAuto(AdminAddChangeAutoViewModel obj, int id)
+        {
+            var carForUpdate = content.Car.FirstOrDefault(c => c.id == id);
+
+            if (carForUpdate == null)
+            {
+                return NotFound();
+            }
+
+            string imagepath = carForUpdate.img; 
+
+            if (obj.ImageUpload != null && obj.ImageUpload.Length > 0)
+            {
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(obj.ImageUpload.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    obj.ImageUpload.CopyTo(stream);
+                }
+
+                imagepath = "/img/" + fileName; // для збереження в бд
+            }
+
+            // Оновлюємо властивості автомобіля
+            carForUpdate.name = obj.Car.name;
+            carForUpdate.shortDesc = obj.Car.shortDesc;
+            carForUpdate.longDesc = obj.Car.longDesc;
+            carForUpdate.img = imagepath;
+            carForUpdate.price = obj.Car.price;
+            carForUpdate.isFavourite = (bool)obj.Car.isFavourite;
+            carForUpdate.available = (bool)obj.Car.available;           
+
+            if (obj.Car.categoryID == 0) 
+            {
+                carForUpdate.categoryID = carForUpdate.categoryID;
+            }
+            else 
+            {
+                carForUpdate.categoryID = obj.Car.categoryID;
+            }
+
+
+            content.Car.Update(carForUpdate);
+            content.SaveChanges();
+
+            return RedirectToAction("AdminHome");
         }
     }
 }
