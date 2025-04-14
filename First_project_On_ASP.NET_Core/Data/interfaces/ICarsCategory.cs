@@ -6,6 +6,6 @@ namespace Shop.Data.interfaces
 {
     public interface ICarsCategory
     {
-        IEnumerable<Category> AllCegories { get; }
+       public IEnumerable<Category> AllCegories { get; }
     }
 }

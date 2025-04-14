@@ -1,5 +1,5 @@
 ﻿@using Shop.Data.interfaces
-@model Shop.Data.Models.Car
+@model AdminAddChangeAutoViewModel
 
 
 <link href="/css/addAuto_style.css" rel="stylesheet" />
@@ -10,44 +10,49 @@
 
     <form asp-action="AddAuto" method="Post" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="name">Назва автомобіля</label>
-            <input type="text" class="form-control" id="name" name="name"  required />
+            <label asp-for="Car.name">Назва автомобіля</label>
+            <input asp-for="Car.name" type="text" class="form-control" id="name"  required />
         </div>
 
         <div class="form-group">
-            <label for="shortDesc">Короткий опис</label>
-            <input type="text" class="form-control" id="shortDesc" name="shortDesc"  required />
+            <label asp-for="Car.shortDesc">Короткий опис</label>
+            <input asp-for="Car.shortDesc" type="text" class="form-control" id="shortDesc" required />
         </div>
 
         <div class="form-group">
-            <label for="longDesc">Довгий опис</label>
-            <textarea class="form-control" id="longDesc" name="longDesc" rows="4" required></textarea>
+            <label asp-for="Car.longDesc">Довгий опис</label>
+            <textarea asp-for="Car.longDesc" class="form-control" id="longDesc" rows="4" required></textarea>
         </div>
 
         <div class="form-group">
-            <label for="img">Фото автомобіля</label>
-            <input type="file" class="form-control" id="img" name="img" />
+            <label asp-for="ImageUpload">Фото автомобіля</label>
+            <input asp-for ="ImageUpload" type ="file" class="form-control" id="img"  />
         </div>
 
         <div class="form-group">
-            <label for="price">Ціна</label>
-            <input type="number" class="form-control" id="price" name="price" value="price" required />
+            <label asp-for="Car.price">Ціна</label>
+            <input asp-for="Car.price" type="number" class="form-control" id="price" value="price" required />
         </div>
 
         <div class="form-group checkbox-group">
-            <label for="isFavourite">Вибраний</label>
-            <input type="checkbox" class="form-check-input" id="isFavourite" name="isFavourite" isFavourite ? "checked" : "" />
+            <label asp-for="Car.isFavourite">Вибраний</label>
+            <input asp-for="Car.isFavourite" type="checkbox" class="form-check-input" id="isFavourite"/>  @* Car.isFavourite ? "checked" : "" /> *@
         </div>
 
         <div class="form-group checkbox-group">
-            <label for="available">Доступний</label>
-            <input type="checkbox" class="form-check-input" id="available" name="available" available ? "checked" : "" />
+            <label asp-for="Car.available">Доступний</label>
+            <input asp-for="Car.available" type="checkbox" class="form-check-input" id="available"/>@*  available ? "checked" : "" /> *@
         </div>
 
         <div class="form-group">
-            <label for="categoryID">Категорія</label>
-            <select class="form-control" id="categoryID" name="categoryID" required>
-                @* Додай категорії з ViewBag, коли треба *@
+            <label asp-for="Car.categoryID">Категорія</label>
+            <select asp-for="Car.categoryID" class="form-control" id="categoryID" required>
+                @{
+                    foreach(var item in Model.allCategory.AllCegories)
+                    {
+                                <option value="@item.Id">@item.categoryName</option>
+                    }
+                }
             </select>
         </div>
 
