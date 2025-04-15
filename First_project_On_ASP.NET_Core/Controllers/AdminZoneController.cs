@@ -268,6 +268,11 @@ namespace Shop.Controllers
             
             var carForRemove = content.Car.FirstOrDefault(c => c.id == id);
 
+            var webRootPath = Directory.GetCurrentDirectory();
+            var pathForDelete = Path.Combine(webRootPath, "wwwroot", carForRemove.img.TrimStart('/'));
+           
+
+
             if (carForRemove == null)
             {
                 ModelState.AddModelError("", "неможливо видалити"); // нігде не обробляється
@@ -276,6 +281,11 @@ namespace Shop.Controllers
             {
                 content.Car.Remove(carForRemove);
                 content.SaveChanges();
+
+                if (System.IO.File.Exists(pathForDelete) && !carForRemove.img.Contains("default.png"))
+                {
+                    System.IO.File.Delete(pathForDelete);
+                }
             }
 
             model.allCategory = _allCategories;
