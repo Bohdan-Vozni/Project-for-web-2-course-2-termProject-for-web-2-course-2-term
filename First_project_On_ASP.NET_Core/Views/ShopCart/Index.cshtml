@@ -8,17 +8,26 @@
         <div class="cart-item animate-fade-in">
             <h4>🚗 @el.car.name</h4>
             <p><strong>Ціна:</strong> @el.car.price.ToString("c")</p>
-            <form asp-action="deleteToCart" asp-controller="ShopCart" asp-route-id="@el.car.id">
-                    <button type="submit" class="btn">Видалити товар з корзини</button>
+
+            <form asp-controller="Order" asp-action="Checkout" method="Post">
+                    <button type="submit" class="btn" >Зарезервувати</button>
             </form>
+
+            @*  <a href="/Home/Index" class="nav-link px-2 text-white">Видалити товар з вибраного</a> *@
+
+            <form asp-action="deleteToCart" asp-controller="ShopCart" asp-route-id="@el.car.id">
+                    <button type="submit" class="btn">Видалити товар з вибраного</button>
+            </form> 
+            
         </div>
     }
 
     <hr class="divider" />
 
     <div class="checkout-container">
-        <form asp-controller="Order" asp-action="Checkout" method="Post">
-            <button type="submit" class="checkout-button">Оплатити</button>
+        <form asp-controller="Home" asp-action="Index" method="Post">
+            <button type="submit" class="checkout-button">Вернутися на головну</button>
         </form>
     </div>
 </div>
+
