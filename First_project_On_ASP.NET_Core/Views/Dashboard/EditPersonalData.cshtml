@@ -1,0 +1,69 @@
+﻿@model User
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+
+
+<link rel="stylesheet" href="~/css/EditPersonalData_style.css" type="text/css"/>
+
+
+<div class="login-container">
+    <div class="login-box">
+
+        <h2>Реєстрація</h2>
+        <form asp-action="EditPersonalData" asp-controller="Dashboard" method="Post" id="signupForm"  asp-route-id="@Model.id">
+       
+        <div class="form-group">
+            <label asp-for="name"  class="TextLabel">Ім'я</label>
+            <input asp-for="name" class="form-control form-controlLogin" placeholder="Введіть ваше ім'я"/>
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="surname"  class="TextLabel">Прізвище</label>
+            <input asp-for="surname" class="form-control form-controlLogin" placeholder="Введіть ваше прізвище"/>
+            <span asp-validation-for="surname" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="middlName" class="TextLabel">По батькові</label>
+            <input asp-for="middlName" class="form-control form-controlLogin" placeholder="Введіть по батькові"/>
+            <span asp-validation-for="middlName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="age"  class="TextLabel">Вік</label>
+            <input asp-for="age" class="form-control form-controlLogin" placeholder="Введіть ваш вік"/>
+            <span asp-validation-for="age" class="text-danger"></span>
+        </div>
+
+         <div class="form-group">
+             <label asp-for="login"  class="TextLabel">Логін</label>
+            <input asp-for="login" class="form-control form-controlLogin" placeholder="Введіть ваш логін" />
+            <span asp-validation-for="login" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="phoneNumber" class="TextLabel">Номер телефону</label>
+            <input asp-for="phoneNumber" class="form-control form-controlLogin" placeholder="Введіть ваш телефон"/>
+            <span asp-validation-for="phoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="email" class="TextLabel" >Електронна пошта</label>
+            <input asp-for="email" class="form-control form-controlLogin" placeholder="Введіть вашу електронну пошту"/>
+            <span asp-validation-for="email" class="text-danger"></span>
+        </div>
+
+
+            <button type="submit" class="btn btnLogin">Змінити</button>
+        </form>
+
+        <form asp-action="Personal_Account" asp-controller="Dashboard" method="Get">
+            <button type="submit" class="btn btnLogin">Вихід</button>
+        </form>
+
+    </div>
+</div>
+
+<script src="~/js/AuditForPassword.js"></script>

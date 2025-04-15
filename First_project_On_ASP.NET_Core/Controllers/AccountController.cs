@@ -59,7 +59,7 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUP(User user)
+        public IActionResult SignUP(UserViewModel user)
         {
             var availableUser = content.User.FirstOrDefault(u => u.login == user.login);
             if (availableUser != null)

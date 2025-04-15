@@ -275,7 +275,7 @@ namespace Shop.Controllers
             else 
             {
                 content.Car.Remove(carForRemove);
-                //content.SaveChanges();
+                content.SaveChanges();
             }
 
             model.allCategory = _allCategories;
