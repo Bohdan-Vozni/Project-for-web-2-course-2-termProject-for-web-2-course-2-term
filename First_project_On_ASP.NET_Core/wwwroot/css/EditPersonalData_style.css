@@ -1,0 +1,95 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden; /* Вимикає горизонтальний скрол */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-group{
+    padding: 8px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out;
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0d6efd;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+input.form-controlLogin {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+input.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+}
+
+button.btnLogin {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+}
+
+button.btn:hover {
+    background-color: #0b5ed7;
+}
+
+button.btnLogin {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.text-danger {
+    color: palevioletred;
+}
+.TextLabel{
+    color: black;
+}
+/* Анімації */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
