@@ -36,7 +36,7 @@ namespace Shop.Data.Models
 
         public bool isAdmin { get; set; }
 
-        public string ShopCartId { get; set; }
+        
 
         public List<ShopCartItem> ShopCartItems { get; set; }
     }

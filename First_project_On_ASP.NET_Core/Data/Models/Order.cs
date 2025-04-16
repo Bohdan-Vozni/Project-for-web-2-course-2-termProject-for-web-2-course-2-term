@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,8 @@ namespace Shop.Data.Models
 
         public List<OrderDetail> orderDetails { get; set; }
 
+        public int placeTakedId { get; set; }
 
+        public Place place { get; set; }
     }
 }

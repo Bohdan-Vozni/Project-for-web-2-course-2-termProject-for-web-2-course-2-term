@@ -5,6 +5,7 @@ using Shop.Data.Models;
 using Shop.Data.Repository;
 using Shop.ViewModels;
 using System.Linq;
+using System.Text.Json;
 
 namespace Shop.Controllers
 {
@@ -48,7 +49,8 @@ namespace Shop.Controllers
             var item = _carRep.Cars.FirstOrDefault(i => i.id == id);
             if (item != null)
             {
-                _shopCart.AddToCart(item);
+                var userDeserialization = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("User"));
+                _shopCart.AddToCart(item,userDeserialization.id);
             }
 
             return RedirectToAction("Index");

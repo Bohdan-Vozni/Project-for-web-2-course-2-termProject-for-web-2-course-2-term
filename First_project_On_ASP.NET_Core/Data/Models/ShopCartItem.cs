@@ -13,7 +13,10 @@ namespace Shop.Data.Models
         public Car car { get; set; }
 
         public int price { get; set; }
+
         public string ShopCartId { get; set; }
+
+        public int UserId { get; set; }
         public User User { get; set; }
     }
 }

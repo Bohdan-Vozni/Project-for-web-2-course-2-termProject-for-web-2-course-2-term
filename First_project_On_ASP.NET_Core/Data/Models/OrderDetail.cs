@@ -14,5 +14,6 @@ namespace Shop.Data.Models
         public virtual Car car { get; set; }
         public virtual Order order { get; set; }
        
+        public virtual OrderDetailReturn OrderDetailReturn { get; set; }
     }
 }

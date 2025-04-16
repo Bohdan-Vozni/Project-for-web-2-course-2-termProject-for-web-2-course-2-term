@@ -19,6 +19,12 @@ namespace Shop.Data
         public DbSet<OrderDetail> OrderDetailUp { get; set; }
 
         public DbSet<User> User { get; set; }
+
+        public DbSet<Place> Places { get; set; }
+
+        public DbSet<Reviews> Reviews { get; set; }
+
+        public DbSet<OrderDetailReturn> OrderDetailReturn { get; set; }
         
     }
 }

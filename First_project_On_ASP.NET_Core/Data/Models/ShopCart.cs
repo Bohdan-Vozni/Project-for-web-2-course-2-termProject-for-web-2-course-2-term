@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace Shop.Data.Models
@@ -15,6 +16,8 @@ namespace Shop.Data.Models
     public class ShopCart
     {
         private readonly AppDBContent appDBContent;
+
+      
 
         public ShopCart(AppDBContent appDBContent)
         {
@@ -28,39 +31,36 @@ namespace Shop.Data.Models
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             var context = services.GetService<AppDBContent>();
-
+            
 
             if (session.GetString("User") == null)
             {
                 return new ShopCart(context);
             }
 
-            var userDeserialization = JsonSerializer.Deserialize<User>(session.GetString("User"));
+            
 
-            if (userDeserialization.ShopCartId == null)
+            if (true)// context.ShopCartItem.ShopCartId()
             {
-                string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-                userDeserialization.ShopCartId = shopCartId;
+                string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString(); //
+                
 
-                session.SetString("CartId", shopCartId);
+                session.SetString("CartId", shopCartId);//
 
-                context.User.Update(userDeserialization);
-                context.SaveChanges();
+                
 
                 return new ShopCart(context) { ShopCartId = shopCartId };
             }
-            else
-            {                            
-                return new ShopCart(context) { ShopCartId = userDeserialization.ShopCartId };
-            }
+            
         }
 
-        public void AddToCart (Car car)
+        public void AddToCart (Car car, int UserID)
         {
             appDBContent.ShopCartItem.Add(new ShopCartItem 
             { 
                 ShopCartId = ShopCartId,
                 CarID = car.id,   // 🔹 Тепер явно зберігаємо ID машини
+                UserId = UserID,
                 car = car,
                 price = car.price,
             });

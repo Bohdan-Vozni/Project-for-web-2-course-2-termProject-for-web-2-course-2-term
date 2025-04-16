@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Identity.Client;
 using System.Security.Permissions;
 using System.Security.Policy;
 
@@ -25,6 +26,9 @@ namespace Shop.Data.Models
         public int categoryID { get; set; }
 
         public virtual Category category { get; set; }
+
+        public int placeID { get; set; }
+        public virtual Place place { get; set; }
 
     }
 }
