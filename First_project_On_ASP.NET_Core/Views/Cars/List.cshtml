@@ -1,16 +1,16 @@
 ﻿@model CarsListViewModels
 
+<link rel="stylesheet" href="~/css/SearchForPlacesForCar_style.css" tyte = "text/css"/>
+
 <h1>Всі автомобілі</h1> 
 <h3>@Model.currCategory</h3> 
-<form asp-action="List" asp-controller="Cars" method="post">
+<form asp-action="List" asp-controller="Cars" method="post" class="search-form">
     <div class="form-group">
         <label asp-for="@Model.idPlaces">Категорія</label>
         <select asp-for="@Model.idPlaces" class="form-control" id="categoryID" required>
-            @{
-                foreach (var item in Model.allPlaces)
-                {
-                            <option value="@item.Id">@item.placeName</option>
-                }
+            @foreach (var item in Model.allPlaces)
+            {
+                    <option value="@item.Id">@item.placeName</option>
             }
         </select>
 
