@@ -44,6 +44,15 @@ namespace Shop.Data
                 content.Category.AddRange(Categories.Select(c => c.Value));
             }
 
+            if( !content.Places.Any())
+            {
+                content.Places.AddRange(Place.Select(c => c.Value));
+                content.SaveChanges();
+            }
+
+            var first = content.Places.First();
+            //var last = content.Places.Last();
+
             if (!content.Car.Any())
             {
                 content.AddRange(
@@ -54,7 +63,10 @@ namespace Shop.Data
                     img = "/img/teslavodel3.jpg",
                     price = 4500,
                     isFavourite = true,
-                    category = Categories["Електромобіль"]
+                    available = true,
+                    category = Categories["Електромобіль"],
+                    placeID = first.Id,
+
                 },
 
                 new Car
@@ -64,7 +76,9 @@ namespace Shop.Data
                     img = "/img/teslavodel3.jpg",
                     price = 4500,
                     isFavourite = true,
-                    category = Categories["Електромобіль"]
+                    available = true,
+                    category = Categories["Електромобіль"],
+                    placeID = first.Id
                 },
 
                 new Car
@@ -74,7 +88,9 @@ namespace Shop.Data
                     img = "/img/audirs7.jpg",
                     price = 2500,
                     isFavourite = true,
-                    category = Categories["класичний автомобіль"]
+                    available = true,
+                    category = Categories["класичний автомобіль"],
+                    placeID = first.Id + 1
                 }
                     );
             }
@@ -107,6 +123,34 @@ namespace Shop.Data
                 return category;
             }
         }
+
+        public static Dictionary<string, Place> place;
+
+        public static Dictionary<string , Place> Place
+        {
+            get
+            {
+                if (place == null)
+                {
+                    var list = new Place[]
+                    {
+                        new Place { placeName = "ВДНГ", address = "ВДНГ", desc = "Станція метро Виставковий центр" },
+                        new Place { placeName = "Іподром", address = "Іпродом", desc = "Станція метро іподром" }
+                    };
+
+
+                    place = new Dictionary<string, Place>();
+
+                    foreach (var el in list)
+                    {
+                        place.Add(el.placeName, el);
+                    }
+
+                }
+                return place;
+            }
+        }
+
 
         public static Dictionary<string, User> user;
 

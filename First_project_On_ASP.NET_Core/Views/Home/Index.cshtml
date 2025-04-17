@@ -3,9 +3,26 @@
 <link rel="stylesheet" href="~/css/main.css" tyte = "text/css"/>
 
 <h1>Кращі автомобілі</h1> 
+<form asp-action="Index" asp-controller="Home" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.idPlaces">Категорія</label>
+        <select asp-for="@Model.idPlaces" class="form-control" id="categoryID" required>
+            @{
+                foreach (var item in Model.allPlaces)
+                {
+                    <option value="@item.Id">@item.placeName</option>
+                }
+            }
+        </select>
 
+        <div>
+            <button class="btn" type="submit">Знайти</button>
+        </div>
+    </div>
+</form>
 <div class= "row mt-5 mb-2">
     @{ 
+
         foreach (Car car in Model.favCars)
         {
             @Html.Partial("Allcars", car)

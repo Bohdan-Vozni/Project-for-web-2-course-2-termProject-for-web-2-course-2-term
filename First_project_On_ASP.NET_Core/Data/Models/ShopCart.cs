@@ -38,16 +38,23 @@ namespace Shop.Data.Models
                 return new ShopCart(context);
             }
 
-            
+            var userDeserialization = JsonSerializer.Deserialize<User>(session.GetString("User"));
+           
 
-            if (true)// context.ShopCartItem.ShopCartId()
+            if (context.ShopCartItem.FirstOrDefault( s => s.UserId == userDeserialization.id) == null)// context.ShopCartItem.ShopCartId()
             {
-                string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString(); //
-                
+                string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();                 
 
-                session.SetString("CartId", shopCartId);//
+                session.SetString("CartId", shopCartId);               
 
-                
+                return new ShopCart(context) { ShopCartId = shopCartId };
+            }
+            else
+            {
+                var shopCartItem = context.ShopCartItem.FirstOrDefault(u => u.UserId == userDeserialization.id);
+
+                string shopCartId = shopCartItem.ShopCartId;
+
 
                 return new ShopCart(context) { ShopCartId = shopCartId };
             }

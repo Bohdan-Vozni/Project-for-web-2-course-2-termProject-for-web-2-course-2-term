@@ -1,7 +1,24 @@
-﻿
+﻿@model CarsListViewModels
+
 <h1>Всі автомобілі</h1> 
 <h3>@Model.currCategory</h3> 
+<form asp-action="List" asp-controller="Cars" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.idPlaces">Категорія</label>
+        <select asp-for="@Model.idPlaces" class="form-control" id="categoryID" required>
+            @{
+                foreach (var item in Model.allPlaces)
+                {
+                            <option value="@item.Id">@item.placeName</option>
+                }
+            }
+        </select>
 
+        <div>
+            <button class="btn" type="submit">Знайти</button>
+        </div>
+    </div>
+</form>
 <div class= "row mt-5 mb-2">
     @{ 
         foreach (Car car in Model.allCars)
@@ -12,4 +29,4 @@
 
     }
 
-</divv>
+</div>
