@@ -19,12 +19,14 @@ namespace Shop.Controllers
         private readonly ICarsCategory _allCategories;
         private readonly IAllCars _allCars;
         private AppDBContent content;
+        private readonly IAllPlace _allPlace;
 
-        public AdminZoneController (AppDBContent content, ICarsCategory allCategory, IAllCars allCars)
+        public AdminZoneController (AppDBContent content, ICarsCategory allCategory, IAllCars allCars, IAllPlace allPlace)
         {
             this.content = content;
             _allCategories = allCategory;
             _allCars = allCars;
+            _allPlace = allPlace;
         }
         public IActionResult AdminHome()
         {
@@ -34,7 +36,11 @@ namespace Shop.Controllers
         [HttpGet]
         public IActionResult AddAuto()
         {
-            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel {allCategory =_allCategories };
+            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel 
+            {
+                allCategory =_allCategories,
+                allPlaces = _allPlace,
+            };
             return View(AdminAddChangeAutoViewModel);
         }
 
@@ -66,6 +72,7 @@ namespace Shop.Controllers
                 isFavourite = (bool)obj.Car.isFavourite,
                 available = (bool)obj.Car.available,
                 categoryID = obj.Car.categoryID,
+                placeID = obj.idPlaces,
             };
 
             content.Car.Add(car);

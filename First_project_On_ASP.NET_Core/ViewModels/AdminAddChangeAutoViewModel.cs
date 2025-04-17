@@ -16,5 +16,9 @@ namespace Shop.ViewModels
         public Car Car { get; set; } = new Car();
 
         public List<Car> FountCars { get; set; }
+
+        public IAllPlace allPlaces { get; set; }
+
+        public int idPlaces { get; set; }
     }
 }
