@@ -7,7 +7,7 @@
 <div class="form-container">
     <h2>Зміна інформації про автомобіль</h2>
 
-    <form asp-action="ChangeInfoAuto" method="Post" enctype="multipart/form-data" asp-route-id="@Model.Car.id">
+    <form asp-action="ChangeInfoAuto" method="Post" enctype="multipart/form-data" asp-route-idCategory="@Model.Car.id" >
         <div class="form-group">
             <label asp-for="Car.name">Назва автомобіля</label>
             <input asp-for="Car.name" type="text" class="form-control" id="name"  required />
@@ -72,6 +72,29 @@
                         }
                     }
                 }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="placeID">Місце</label>
+            <select class="form-control" id="placeID" name="idPlaces" required>
+                        @{
+                            foreach (var item in Model.allPlaces.getAllPlace)
+                            {
+                                if (item.Id == Model.Car.placeID)
+                                {
+                                        <option value="@item.Id" selected>
+                                        @item.placeName
+                                        </option>
+                                }
+                                else
+                                {
+                                        <option value="@item.Id">
+                                        @item.placeName
+                                        </option>
+                                }
+                            }
+                        }
             </select>
         </div>
 

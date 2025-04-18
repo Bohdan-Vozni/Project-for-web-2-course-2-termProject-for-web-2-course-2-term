@@ -84,7 +84,11 @@ namespace Shop.Controllers
         [HttpGet]
         public IActionResult FindAutoForChange()
         {
-            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel { allCategory = _allCategories };
+            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel 
+            { 
+                allCategory = _allCategories,
+                allPlaces = _allPlace
+            };
             return View(AdminAddChangeAutoViewModel);
         }
 
@@ -117,6 +121,11 @@ namespace Shop.Controllers
                 query = query.Where(c => c.categoryID == model.Car.categoryID);
             }
 
+            if (model.idPlaces != 0)
+            {
+                query = query.Where(c => c.placeID == model.idPlaces);
+            }
+
             var allFindCar = query.ToList();
 
             if(allFindCar.Count == 0)
@@ -129,6 +138,7 @@ namespace Shop.Controllers
             { 
                allCategory = _allCategories,
                FountCars = allFindCar,
+               allPlaces = _allPlace
 
             };
 
@@ -146,6 +156,7 @@ namespace Shop.Controllers
             {
                 allCategory = _allCategories,
                 Car = car,
+                allPlaces= _allPlace
 
             };
             
@@ -160,9 +171,16 @@ namespace Shop.Controllers
 
 
         [HttpPost]
-        public IActionResult ChangeInfoAuto(AdminAddChangeAutoViewModel obj, int id)
+        public IActionResult ChangeInfoAuto(AdminAddChangeAutoViewModel obj, int idCategory)
         {
-            var carForUpdate = content.Car.FirstOrDefault(c => c.id == id);
+            if (!ModelState.IsValid)
+            {
+                obj.allCategory = _allCategories;
+                obj.allPlaces = _allPlace;
+                return View(obj);
+            }
+
+            var carForUpdate = content.Car.FirstOrDefault(c => c.id == idCategory);
 
             if (carForUpdate == null)
             {
@@ -191,17 +209,28 @@ namespace Shop.Controllers
             carForUpdate.img = imagepath;
             carForUpdate.price = obj.Car.price;
             carForUpdate.isFavourite = (bool)obj.Car.isFavourite;
-            carForUpdate.available = (bool)obj.Car.available;           
+            carForUpdate.available = (bool)obj.Car.available;
 
-            if (obj.Car.categoryID == 0) 
-            {
-                carForUpdate.categoryID = carForUpdate.categoryID;
-            }
-            else 
+
+         
+            if (obj.Car.categoryID != 0)
             {
                 carForUpdate.categoryID = obj.Car.categoryID;
             }
 
+            if (obj.idPlaces != 0)
+            {
+                var placeExists = _allPlace.getAllPlace.Any(p => p.Id == obj.idPlaces);
+                if (placeExists)
+                {
+                    carForUpdate.placeID = obj.idPlaces;
+                }
+                else
+                {
+                    ModelState.AddModelError("idPlaces", "Обране місце не існує");
+                    return View(obj);
+                }
+            }
 
             content.Car.Update(carForUpdate);
             content.SaveChanges();
