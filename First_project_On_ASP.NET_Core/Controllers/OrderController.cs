@@ -1,44 +1,76 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Shop.Data;
 using Shop.Data.interfaces;
 using Shop.Data.Models;
+using System;
+using System.Text.Json;
 
 namespace Shop.Controllers
 {
     public class OrderController : Controller
     {
 
-        private readonly IAllOrders allOrders;
-        private readonly ShopCart shopCart;
+      
+        
+        private readonly AppDBContent appDBContent;
+        private static int IdCarForWrite;
 
-        public OrderController(IAllOrders allOrders, ShopCart shopCart)
+        public OrderController(  AppDBContent appDBContent)
         {
-            this.allOrders = allOrders;
-            this.shopCart = shopCart;
+            
+            
+            this.appDBContent = appDBContent;
         }
 
-        public IActionResult Checkout()
+        [HttpGet]
+        public IActionResult Checkout(int idCar)
         {
+            IdCarForWrite = idCar;
+           
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
-            shopCart.listShopItems = shopCart.getShopItems();
+            
 
-            if(shopCart.listShopItems.Count == 0)
-            {
-                ModelState.AddModelError("","Немає товарів в корзині");
-            }
+           
 
             if(ModelState.IsValid)
             {
-                allOrders.createOrder(order);
+                createOrder(order);
                 return RedirectToAction("Complete");
             }
 
+
             return View(order);
+        }
+
+        public void createOrder(Order order)
+        {
+            order.orderTime = DateTime.Now;
+            appDBContent.Order.Add(order);
+            appDBContent.SaveChanges();
+
+            var UserSerialilize = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("User"));
+
+
+            var orderDerail = new OrderDetail()
+            {
+                orderID = order.id,
+                CarID = IdCarForWrite,
+                userId = UserSerialilize.id,
+                
+            };
+
+            appDBContent.OrderDetailUp.Add(orderDerail);
+
+
+            appDBContent.SaveChanges();
+
         }
 
         public IActionResult Complete()

@@ -9,8 +9,9 @@
             <h4>🚗 @el.car.name</h4>
             <p><strong>Ціна:</strong> @el.car.price.ToString("c")</p>
 
-            <form asp-controller="Order" asp-action="Checkout" method="Post">
-                    <button type="submit" class="btn" >Зарезервувати</button>
+            <form asp-controller="Order" asp-action="Checkout" method="Get" >
+                 <input type="hidden" name="idCar" value="@el.car.id" /> 
+                 <button type="submit" class="btn" >Зарезервувати</button>
             </form>
 
             @*  <a href="/Home/Index" class="nav-link px-2 text-white">Видалити товар з вибраного</a> *@
