@@ -242,7 +242,11 @@ namespace Shop.Controllers
         [HttpGet]
         public IActionResult FindAutoForDelete()
         {
-            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel { allCategory = _allCategories };
+            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel
+            {
+                allCategory = _allCategories,
+                allPlaces = _allPlace
+            };
             return View(AdminAddChangeAutoViewModel);
         }
 
@@ -275,6 +279,11 @@ namespace Shop.Controllers
                 query = query.Where(c => c.categoryID == model.Car.categoryID);
             }
 
+            if (model.idPlaces != 0)
+            {
+                query = query.Where(c => c.placeID == model.idPlaces);
+            }
+
             var allFindCar = query.ToList();
 
             if (allFindCar.Count == 0)
@@ -287,11 +296,12 @@ namespace Shop.Controllers
             {
                 allCategory = _allCategories,
                 FountCars = allFindCar,
+                allPlaces = _allPlace
 
             };
 
 
-            return View(modelReturn);
+            return View(modelReturn); 
         }
 
         [HttpPost]
@@ -326,8 +336,15 @@ namespace Shop.Controllers
 
             model.allCategory = _allCategories;
 
-            
-            return View("FindAutoForDelete", model);
+            var AdminAddChangeAutoViewModel = new AdminAddChangeAutoViewModel
+            {
+                FountCars =model.FountCars,
+                allCategory = _allCategories,
+                allPlaces = _allPlace
+            };
+            return RedirectToAction("FindAutoForDelete", AdminAddChangeAutoViewModel);
+
+
         }
     }
 }

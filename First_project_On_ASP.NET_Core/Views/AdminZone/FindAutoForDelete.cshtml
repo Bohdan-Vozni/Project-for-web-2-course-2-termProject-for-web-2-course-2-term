@@ -40,8 +40,20 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label asp-for="idPlaces">Категорія</label>
+                <select asp-for="idPlaces" class="form-control" id="categoryID" required>
+                    @{
+                        foreach (var item in Model.allPlaces.getAllPlace)
+                        {
+                                    <option value="@item.Id">@item.placeName</option>
+                        }
+                    }
+                </select>
+            </div>
 
-            <button type="submit" class="btn-primary">Видалити автомобіль</button>
+
+            <button type="submit" class="btn-primary">Знайти автомобіль</button>
         </form>
      </div> 
 
@@ -55,8 +67,8 @@
                                     Вибраний: @(item.isFavourite ? "Так" : "Ні") |
                                     Доступний: @(item.available ? "Так" : "Ні") |
                                     Категорія: @item.category?.categoryName
-                                    <form asp-action="DeleteAuto" asp-controller="AdminZone" asp-route-id= "@item.id" method="Post"> @*змінити метод*@
-                                        <button type="submit" class="btn">видалити</button>
+                                    <form asp-action="DeleteAuto" asp-controller="AdminZone" asp-route-id= "@item.id" method="Post">
+                                        <button type="submit" class="btn">Видалити</button>
                                     </form>
                                 </div>
             }
