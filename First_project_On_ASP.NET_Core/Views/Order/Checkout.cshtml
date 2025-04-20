@@ -1,55 +1,47 @@
 ﻿@model Order 
+ <h3>Оформлення замовлення</h3>
+<div class="allForm-container">
+   
 
-<div class="row">
-    <h3>Оформлення замовлення</h3>
+    <link href="/css/FindAutoForChange_style.css" rel="stylesheet" /> @* стилі з зміни авто *@
 
-    
+     <div class="form-container">
+        <form asp-action="Checkout" method="post" class="form-horizontal">
+            
+                <label asp-for="name"></label>
+                <div class="form-group">
+                    <input asp-for="name" class="form-control" />
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
 
-    <form asp-action="Checkout" method="post" class="form-horizontal">
-        <div class="form-group">
-            <label asp-for="name"></label>
-            <div class="col-md-5">
-                <input asp-for="name" class="form-control" />
-                <span asp-validation-for="name" class="text-danger"></span>
-            </div>
+                <label asp-for="surname"></label>
+                <div class="form-group">
+                    <input asp-for="surname" class="form-control" />
+                    <span asp-validation-for="surname" class="text-danger"></span>
+                </div>
 
-            <label asp-for="surname"></label>
-            <div class="col-md-5">
-                <input asp-for="surname" class="form-control" />
-                <span asp-validation-for="surname" class="text-danger"></span>
-            </div>
+                <label asp-for="adress"></label>
+                <div class="form-group">
+                    <input asp-for="adress" class="form-control" />
+                    <span asp-validation-for="adress" class="text-danger"></span>
+                </div>
 
-            <label asp-for="adress"></label>
-            <div class="col-md-5">
-                <input asp-for="adress" class="form-control" />
-                <span asp-validation-for="adress" class="text-danger"></span>
-            </div>
+                <label asp-for="phone"></label>
+                <div class="form-group">
+                    <input asp-for="phone" class="form-control" />
+                    <span asp-validation-for="phone" class="text-danger"></span>
+                </div>
 
-            <label asp-for="phone"></label>
-            <div class="col-md-5">
-                <input asp-for="phone" class="form-control" />
-                <span asp-validation-for="phone" class="text-danger"></span>
-            </div>
+                <label asp-for="email"></label>
+                <div class="form-group">
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
 
-            <label asp-for="email"></label>
-            <div class="col-md-5">
-                <input asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
-            </div>
+                <button type="submit" class="btn btn-success">Завершити замовлення</button>
 
-            <!-- Додаємо кнопку для відправки -->
-            <div class="col-md-5 mt-3">
-                <input class="btn btn-success" type="submit" value="Завершити замовлення" />
-            </div>
+            
+        </form>
+    </div>  
 
-
-        </div>
-    </form>
-
-    @if (!ViewData.ModelState.IsValid)
-    {
-            <div class="alert alert-danger">
-            <p>Неможливо оформити замовлення ваша корзина пуста</p>
-            </div>
-    }
 </div>
