@@ -39,7 +39,7 @@ namespace Shop.Data.Repository
                 {
                     CarID = el.CarID,
                     orderID = order.id,
-                    price = (uint)el.price,
+                    // додати користувача
                 };
 
                 appDBContent.OrderDetailUp.Add(orderDerail);

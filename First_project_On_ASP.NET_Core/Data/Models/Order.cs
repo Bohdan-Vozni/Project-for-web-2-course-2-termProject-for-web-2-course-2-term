@@ -23,8 +23,6 @@ namespace Shop.Data.Models
 
         public List<OrderDetail> orderDetails { get; set; }
 
-        public int placeTakedId { get; set; }
 
-        public Place place { get; set; }
     }
 }

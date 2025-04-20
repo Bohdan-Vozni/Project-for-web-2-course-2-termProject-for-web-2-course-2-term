@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Data;
 
@@ -11,9 +12,11 @@ using Shop.Data;
 namespace Shop.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20250420154405_change_relation_between_place_and_Order")]
+    partial class change_relation_between_place_and_Order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,16 +135,14 @@ namespace Shop.Migrations
                     b.Property<int>("orderID")
                         .HasColumnType("int");
 
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
+                    b.Property<long>("price")
+                        .HasColumnType("bigint");
 
                     b.HasKey("id");
 
                     b.HasIndex("CarID");
 
                     b.HasIndex("orderID");
-
-                    b.HasIndex("userId");
 
                     b.ToTable("OrderDetailUp");
                 });
@@ -331,17 +332,9 @@ namespace Shop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shop.Data.Models.User", "user")
-                        .WithMany()
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("car");
 
                     b.Navigation("order");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Shop.Data.Models.OrderDetailReturn", b =>
