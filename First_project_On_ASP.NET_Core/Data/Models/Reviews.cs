@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
 
-        public int orderDetailReturnId { get; set; }
+        public int userId { get; set; }
 
-        public OrderDetailReturn orderDetailReturn { get; set; }
+        public User user { get; set; }
 
         public int grade {  get; set; }
 

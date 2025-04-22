@@ -32,6 +32,10 @@ namespace Shop.Data.Models
         public string email { get; set; }
         public DateTime orderTime { get; set; }
 
+        public int placeId { get; set; }
+
+        public virtual Place place { get; set; }
+
         public List<OrderDetail> orderDetails { get; set; }
 
 

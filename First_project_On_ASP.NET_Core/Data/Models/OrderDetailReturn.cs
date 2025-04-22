@@ -21,6 +21,6 @@ namespace Shop.Data.Models
 
         public bool isReturning { get; set; }
 
-        public List<Reviews> Reviews { get; set; }
+        
     }
 }

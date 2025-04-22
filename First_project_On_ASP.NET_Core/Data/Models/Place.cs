@@ -12,10 +12,10 @@ namespace Shop.Data.Models
 
         public string desc { get; set; }
 
-        List<Car> Cars { get; set; }
+        public List<Car> Cars { get; set; }
 
+        public List<Order> Orders { get; set; }
 
-
-        List<OrderDetailReturn> orderDetailReturns { get; set; }
+        public List<OrderDetailReturn> orderDetailReturns { get; set; }
     }
 }

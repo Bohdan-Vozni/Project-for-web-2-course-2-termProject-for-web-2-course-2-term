@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Data;
 
@@ -11,9 +12,11 @@ using Shop.Data;
 namespace Shop.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20250422160627_RETURN_back")]
+    partial class RETURN_back
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,17 +117,12 @@ namespace Shop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("placeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("surname")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("placeId");
 
                     b.ToTable("Order");
                 });
@@ -223,15 +221,15 @@ namespace Shop.Migrations
                     b.Property<int>("grade")
                         .HasColumnType("int");
 
+                    b.Property<int>("orderDetailReturnId")
+                        .HasColumnType("int");
+
                     b.Property<string>("response")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("orderDetailReturnId");
 
                     b.ToTable("Reviews");
                 });
@@ -318,23 +316,12 @@ namespace Shop.Migrations
                         .IsRequired();
 
                     b.HasOne("Shop.Data.Models.Place", "place")
-                        .WithMany("Cars")
+                        .WithMany()
                         .HasForeignKey("placeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("category");
-
-                    b.Navigation("place");
-                });
-
-            modelBuilder.Entity("Shop.Data.Models.Order", b =>
-                {
-                    b.HasOne("Shop.Data.Models.Place", "place")
-                        .WithMany("Orders")
-                        .HasForeignKey("placeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("place");
                 });
@@ -375,7 +362,7 @@ namespace Shop.Migrations
                         .IsRequired();
 
                     b.HasOne("Shop.Data.Models.Place", "place")
-                        .WithMany("orderDetailReturns")
+                        .WithMany()
                         .HasForeignKey("placeId");
 
                     b.Navigation("orderDetail");
@@ -385,13 +372,13 @@ namespace Shop.Migrations
 
             modelBuilder.Entity("Shop.Data.Models.Reviews", b =>
                 {
-                    b.HasOne("Shop.Data.Models.User", "user")
+                    b.HasOne("Shop.Data.Models.OrderDetailReturn", "orderDetailReturn")
                         .WithMany("Reviews")
-                        .HasForeignKey("userId")
+                        .HasForeignKey("orderDetailReturnId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("orderDetailReturn");
                 });
 
             modelBuilder.Entity("Shop.Data.Models.ShopCartItem", b =>
@@ -428,19 +415,13 @@ namespace Shop.Migrations
                     b.Navigation("OrderDetailReturn");
                 });
 
-            modelBuilder.Entity("Shop.Data.Models.Place", b =>
+            modelBuilder.Entity("Shop.Data.Models.OrderDetailReturn", b =>
                 {
-                    b.Navigation("Cars");
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("orderDetailReturns");
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("Shop.Data.Models.User", b =>
                 {
-                    b.Navigation("Reviews");
-
                     b.Navigation("ShopCartItems");
                 });
 #pragma warning restore 612, 618

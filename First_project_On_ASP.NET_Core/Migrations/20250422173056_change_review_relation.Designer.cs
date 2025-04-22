@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Data;
 
@@ -11,9 +12,11 @@ using Shop.Data;
 namespace Shop.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    partial class AppDBContentModelSnapshot : ModelSnapshot
+    [Migration("20250422173056_change_review_relation")]
+    partial class change_review_relation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,17 +117,12 @@ namespace Shop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("placeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("surname")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("placeId");
 
                     b.ToTable("Order");
                 });
@@ -318,23 +316,12 @@ namespace Shop.Migrations
                         .IsRequired();
 
                     b.HasOne("Shop.Data.Models.Place", "place")
-                        .WithMany("Cars")
+                        .WithMany()
                         .HasForeignKey("placeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("category");
-
-                    b.Navigation("place");
-                });
-
-            modelBuilder.Entity("Shop.Data.Models.Order", b =>
-                {
-                    b.HasOne("Shop.Data.Models.Place", "place")
-                        .WithMany("Orders")
-                        .HasForeignKey("placeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("place");
                 });
@@ -375,7 +362,7 @@ namespace Shop.Migrations
                         .IsRequired();
 
                     b.HasOne("Shop.Data.Models.Place", "place")
-                        .WithMany("orderDetailReturns")
+                        .WithMany()
                         .HasForeignKey("placeId");
 
                     b.Navigation("orderDetail");
@@ -426,15 +413,6 @@ namespace Shop.Migrations
             modelBuilder.Entity("Shop.Data.Models.OrderDetail", b =>
                 {
                     b.Navigation("OrderDetailReturn");
-                });
-
-            modelBuilder.Entity("Shop.Data.Models.Place", b =>
-                {
-                    b.Navigation("Cars");
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("orderDetailReturns");
                 });
 
             modelBuilder.Entity("Shop.Data.Models.User", b =>

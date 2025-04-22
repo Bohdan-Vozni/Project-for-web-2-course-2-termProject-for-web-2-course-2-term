@@ -39,5 +39,7 @@ namespace Shop.Data.Models
         
 
         public List<ShopCartItem> ShopCartItems { get; set; }
+
+        public List<Reviews> Reviews { get; set; }
     }
 }
