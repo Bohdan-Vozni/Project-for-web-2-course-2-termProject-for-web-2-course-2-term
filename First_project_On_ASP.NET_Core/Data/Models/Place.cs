@@ -14,7 +14,7 @@ namespace Shop.Data.Models
 
         public List<Car> Cars { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public List<OrderDetail> orderDetails { get; set; }
 
         public List<OrderDetailReturn> orderDetailReturns { get; set; }
     }

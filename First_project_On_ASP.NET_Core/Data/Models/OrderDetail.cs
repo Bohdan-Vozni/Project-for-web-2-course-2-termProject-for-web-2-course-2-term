@@ -13,6 +13,10 @@ namespace Shop.Data.Models
 
         public int userId { get; set; }
 
+        public int placeId { get; set; }
+
+        public virtual Place place { get; set; }
+
         public virtual User user { get; set; }
         public virtual Car car { get; set; }
         public virtual Order order { get; set; }
