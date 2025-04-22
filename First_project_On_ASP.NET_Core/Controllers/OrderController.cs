@@ -4,6 +4,7 @@ using Shop.Data;
 using Shop.Data.interfaces;
 using Shop.Data.Models;
 using System;
+using System.Linq;
 using System.Text.Json;
 
 namespace Shop.Controllers
@@ -57,13 +58,15 @@ namespace Shop.Controllers
 
             var UserSerialilize = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("User"));
 
+            var car = appDBContent.Car.FirstOrDefault(c => c.id == IdCarForWrite);
 
             var orderDerail = new OrderDetail()
             {
                 orderID = order.id,
                 CarID = IdCarForWrite,
                 userId = UserSerialilize.id,
-                
+                placeId = car.placeID,
+
             };
 
             appDBContent.OrderDetailUp.Add(orderDerail);
