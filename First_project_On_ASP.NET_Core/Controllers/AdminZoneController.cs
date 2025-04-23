@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Identity.Client;
 using Shop.Data;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.Text.Json;
 using System.Threading;
 
 namespace Shop.Controllers
@@ -345,6 +348,71 @@ namespace Shop.Controllers
             return RedirectToAction("FindAutoForDelete", AdminAddChangeAutoViewModel);
 
 
+        }
+
+        [HttpGet]
+        public IActionResult ConfirmReturn()
+        {
+            var user = HttpContext.Session.GetString("User");
+            if (string.IsNullOrEmpty(user))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var userDeserialize = JsonSerializer.Deserialize<User>(user);
+
+            // Отримуємо повернені замовлення з підвантаженням всіх необхідних даних
+            var returnedOrderIds = content.OrderDetailReturn
+                .Where(c => c.isReturning == false)
+                .Include(c => c.orderDetail)
+                    .ThenInclude(od => od.car) // Додаємо підвантаження автомобіля
+                .Include(c => c.orderDetail)
+                    .ThenInclude(od => od.user) // Додаємо підвантаження користувача
+                .Include(c => c.placeReturn)
+                .ToList();
+
+            
+
+
+            // Створюємо модель і гарантуємо, що список не буде null
+            var modelReturnAuto = new SmartReturnAutoForCustomerViewModel
+            {
+                userNotActiveOrders = returnedOrderIds ?? new List<OrderDetailReturn>() // Забезпечуємо, що список не null
+            };
+
+            return View(modelReturnAuto);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmReturn(SmartReturnAutoForCustomerViewModel orderDetail, int idOrderReturn)
+        {
+            var user = HttpContext.Session.GetString("User");
+
+            if (string.IsNullOrEmpty(user))
+            {
+                return RedirectToAction("AdminHome", "Account"); 
+            }
+            var userDeserialize = JsonSerializer.Deserialize<User>(user);
+
+            var findOrderDetailReturn = content.OrderDetailReturn
+                .Include(r => r.orderDetail)
+                .ThenInclude(od => od.car)
+                .FirstOrDefault(c => c.Id == idOrderReturn);
+
+            findOrderDetailReturn.personWhoReturn = userDeserialize.name + " " + userDeserialize.surname + " " + userDeserialize.middlName;
+            findOrderDetailReturn.price = findOrderDetailReturn.orderDetail.car.price;
+            findOrderDetailReturn.isReturning = true;
+
+            content.OrderDetailReturn.Update(findOrderDetailReturn);
+
+            var findCar = content.Car.FirstOrDefault( c => c.id == findOrderDetailReturn.orderDetail.car.id);
+            findCar.available = true;
+            findCar.place = findOrderDetailReturn.placeReturn;
+            content.Car.Update(findCar);
+
+            content.SaveChanges();
+
+            return RedirectToAction("ConfirmReturn");
         }
     }
 }

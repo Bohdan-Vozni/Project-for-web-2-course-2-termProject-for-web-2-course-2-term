@@ -120,15 +120,18 @@ namespace Shop.Controllers
             {
                 orderDetailId = idOrderTake,
                 placeReturnID = orderDetail.idPlace,
-                dataTime_return = DateTime.Now,
-                personWhoReturn = userDeserialize.name + " " + userDeserialize.surname + " " + userDeserialize.middlName,
-                price = orderDetailFind.car.price,
+                dataTime_return = DateTime.Now,             
                 isReturning = false,
             };
+            content.Add(orderDetailReturn);
+
 
             // оновити місце положення авто
 
-            content.Add(orderDetailReturn);
+            var carForUpdate = content.Car.FirstOrDefault( c => c.id == orderDetailFind.car.id);
+            carForUpdate.placeID = orderDetail.idPlace;
+            content.Car.Update(carForUpdate);
+
             content.SaveChanges();
 
             return RedirectToAction("ReturnAuto");
