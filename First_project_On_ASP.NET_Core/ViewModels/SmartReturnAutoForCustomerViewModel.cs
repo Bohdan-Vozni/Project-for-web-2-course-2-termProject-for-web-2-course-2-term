@@ -6,7 +6,8 @@ namespace Shop.ViewModels
 {
     public class SmartReturnAutoForCustomerViewModel
     {
-        public List<OrderDetail> userActiveOrders { get; set; }
+        public List<OrderDetail> userActiveOrders { get; set; } 
+        public List<OrderDetailReturn> userNotActiveOrders { get; set; } 
 
         public IEnumerable<Place> allPlace { get; set; }
 

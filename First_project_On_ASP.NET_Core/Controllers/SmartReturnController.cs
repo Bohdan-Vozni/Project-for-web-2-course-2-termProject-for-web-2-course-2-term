@@ -133,5 +133,38 @@ namespace Shop.Controllers
 
             return RedirectToAction("ReturnAuto");
         }
+
+        [HttpGet]
+        public IActionResult CheckReturnAuto()
+        {
+            var user = HttpContext.Session.GetString("User");
+            if (string.IsNullOrEmpty(user))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var userDeserialize = JsonSerializer.Deserialize<User>(user);
+
+            // Отримуємо повернені замовлення з підвантаженням всіх необхідних даних
+            var returnedOrderIds = content.OrderDetailReturn
+                .Where(c => c.isReturning == false)
+                .Include(c => c.orderDetail)
+                    .ThenInclude(od => od.car) // Додаємо підвантаження автомобіля
+                .Include(c => c.orderDetail)
+                    .ThenInclude(od => od.user) // Додаємо підвантаження користувача
+                .Include(c => c.placeReturn)
+                .ToList();
+
+            var result = returnedOrderIds.Where(c => c.orderDetail.user.id == userDeserialize.id).ToList();
+
+
+            // Створюємо модель і гарантуємо, що список не буде null
+            var modelReturnAuto = new SmartReturnAutoForCustomerViewModel
+            {
+                userNotActiveOrders = result ?? new List<OrderDetailReturn>() // Забезпечуємо, що список не null
+            };
+
+            return View(modelReturnAuto);
+        }
     }
 }

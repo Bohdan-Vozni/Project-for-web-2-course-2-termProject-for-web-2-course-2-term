@@ -1,0 +1,62 @@
+﻿@model SmartReturnAutoForCustomerViewModel
+
+<link href="/css/CheckReturnAuto_style.css" rel="stylesheet" />
+
+<div class="rentals-container">
+    @if (Model != null && Model.userNotActiveOrders != null && Model.userNotActiveOrders.Any())
+    {
+        <h2 class="rentals-title">Статус повернених авто</h2>
+        <div class="rentals-grid">
+            @foreach (var order in Model.userNotActiveOrders)
+            {
+                <div class="rental-card">
+                    @if (order.orderDetail?.car?.img != null)
+                    {
+                        <img src="@order.orderDetail.car.img" alt="Зображення автомобіля" class="car-image">
+                    }
+                    else
+                    {
+                        <div class="car-image-placeholder">
+                            <i class="fas fa-car"></i>
+                        </div>
+                    }
+
+                    <div class="rental-details">
+                        <h3 class="text-color">Назва автомобіля:</h3>
+                        <p class="text-color">@(order.orderDetail?.car?.name ?? "Назва не вказана")</p>
+
+                        <h3 class="text-color">Дата повернення:</h3>
+                        <p class="text-color"> @order.dataTime_return.ToString("dd.MM.yyyy HH:mm")</p>
+
+                        <h3 class="text-color">Місце повернення:</h3>
+                        <p class="text-color">@(order.placeReturn?.address ?? "Місце не вказане")</p>
+
+                        <h3 class="text-color">Cтатус</h3>
+                        @{
+                            if (order.isReturning)
+                            {
+                                <p class="text-color">Повернено</p>
+                            }
+                            else
+                            {
+                                <p class="text-color">Здано на первірку</p>
+                            }
+                        }
+                        
+                    </div>
+
+                    <form asp-action="ListFunc" asp-controller="SmartReturn" method="Post" class="return-form">
+                        <button type="submit" class="return-btn">Назад</button>
+                    </form>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="no-rentals-message">
+            <i class="fas fa-info-circle"></i>
+            <p>Всі автомобілі повернуті</p>
+        </div>
+    }
+</div>
