@@ -75,7 +75,21 @@ namespace Shop.Controllers
                     return View(user);
                 }
 
-                content.User.Add(user);
+
+                var newUser = new User
+                {
+                    name = user.name,
+                    surname = user.surname,
+                    middlName = user.middlName,
+                    age = user.age,
+                    phoneNumber = user.phoneNumber,
+                    email = user.email,
+                    login = user.login,
+                    password = user.password,
+                    isAdmin = user.isAdmin,
+                };
+
+                content.User.Add(newUser);
                 content.SaveChanges();
 
                 //DBObjects.userToWrite = user;
