@@ -28,7 +28,7 @@ namespace Shop.Controllers
             }
 
             var items = _shopCart.getShopItems();
-            _shopCart.listShopItems = items;
+            _shopCart.listShopItems = items.Where(c => c.car.available == true).ToList();
 
             var obj = new ShopCartViewModel
             {

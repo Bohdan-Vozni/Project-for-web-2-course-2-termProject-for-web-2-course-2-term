@@ -1,0 +1,85 @@
+﻿@model SmartReturnAutoForCustomerViewModel
+
+<link href="/css/modern-styles.css" rel="stylesheet" /> @* стилі з зміни авто *@
+
+<div class="rentals-container">
+    
+
+    @if (Model?.userActiveOrders?.Any() == true)
+    {
+        if(Model.userActiveOrders.Count == 1)
+        {
+            <div class="rentals-grid">
+                @foreach (var order in Model.userActiveOrders)
+                {
+                    <h2 class="rentals-title">Повернення @order.car.name</h2>
+                    <div class="rental-card">
+                        <form asp-action="AddOrderDetailReturn" asp-controller="SmartReturn" asp-route-idOrderTake="@order.id" class="return-form" method="post">
+                            <img src="@order.car.img" alt="Назва автомобіля" class="car-image">
+
+                            <div class="rental-details">
+                                <h3 class="car-name">@order.car?.name</h3>
+                                <p class="rental-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>@order.place?.address</span>
+                                </p>
+                            </div>
+
+                            <div class="rental-details">
+                                <label asp-for="@Model.idPlace">Виберіть місце повернення</label>
+                                <select asp-for="@Model.idPlace" class="form-control" id="placeID" required>
+                                    @{
+                                        foreach (var item in Model.allPlace)
+                                        {
+                                            <option value="@item.Id">@item.placeName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <p>Тест ID місця: @Model.idPlace</p>
+
+                       
+                            <button type="submit" class="return-btn">
+                                <i class="fas fa-undo-alt"></i> Повернути авто
+                            </button>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <h2 class="rentals-title">Ваші активні оренди</h2>
+            <div class="rentals-grid">
+                @foreach (var order in Model.userActiveOrders)
+                {
+                    <div class="rental-card">
+
+                        <img src="@order.car.img" alt="Назва автомобіля" class="car-image">
+
+                        <div class="rental-details">
+                            <h3 class="car-name">@order.car?.name</h3>
+                            <p class="rental-info">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>@order.place?.address</span>
+                            </p>
+                        </div>
+                        <form asp-action="ReturnAuto" asp-controller="SmartReturn" asp-route-idOrderTake="@order.id" method="Post" class="return-form">
+                            <button type="submit" class="return-btn">
+                                <i class="fas fa-undo-alt"></i> Повернути авто
+                            </button>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+       
+    }
+    else
+    {
+        <div class="no-rentals-message">
+            <i class="fas fa-info-circle"></i>
+            <p>У вас немає активних оренд</p>
+        </div>
+    }
+</div>

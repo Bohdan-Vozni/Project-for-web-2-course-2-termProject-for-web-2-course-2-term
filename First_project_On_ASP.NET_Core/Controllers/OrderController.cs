@@ -71,6 +71,8 @@ namespace Shop.Controllers
 
             appDBContent.OrderDetailUp.Add(orderDerail);
 
+            car.available = false;
+            appDBContent.Update(car);
 
             appDBContent.SaveChanges();
 

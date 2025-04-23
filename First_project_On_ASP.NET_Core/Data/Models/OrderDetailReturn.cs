@@ -15,7 +15,7 @@ namespace Shop.Data.Models
 
         public int placeReturnID {  get; set; }
 
-        public Place place { get; set; }
+        public Place placeReturn { get; set; }
 
         public DateTime dataTime_return { get; set; }
 
