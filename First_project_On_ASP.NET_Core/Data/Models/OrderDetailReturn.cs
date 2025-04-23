@@ -19,6 +19,10 @@ namespace Shop.Data.Models
 
         public DateTime dataTime_return { get; set; }
 
+        public string personWhoReturn { get; set; }
+
+        public int price { get; set; }
+
         public bool isReturning { get; set; }
 
         
