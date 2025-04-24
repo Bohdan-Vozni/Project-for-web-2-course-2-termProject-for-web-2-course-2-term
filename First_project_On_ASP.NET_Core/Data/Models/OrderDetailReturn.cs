@@ -25,6 +25,6 @@ namespace Shop.Data.Models
 
         public bool isReturning { get; set; }
 
-        
+        public string img {  get; set; }
     }
 }
