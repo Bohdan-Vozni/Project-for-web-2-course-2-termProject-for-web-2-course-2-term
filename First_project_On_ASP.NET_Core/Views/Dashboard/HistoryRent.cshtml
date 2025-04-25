@@ -28,6 +28,9 @@
                         <h3 class="text-color">Дата повернення:</h3>
                         <p class="text-color"> @order.dataTime_return.ToString("dd.MM.yyyy HH:mm")</p>
 
+                        <h3 class="text-color">Місце подачі:</h3>
+                        <p class="text-color">@(order.orderDetail.place.placeName ?? "Місце не вказане")</p>
+
                         <h3 class="text-color">Місце повернення:</h3>
                         <p class="text-color">@(order.placeReturn?.address ?? "Місце не вказане")</p>
 

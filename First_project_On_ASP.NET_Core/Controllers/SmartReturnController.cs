@@ -7,6 +7,7 @@ using Shop.Data.Models;
 using Shop.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 
@@ -116,12 +117,35 @@ namespace Shop.Controllers
                 .Include(o => o.place)
                 .FirstOrDefault(o => o.id == idOrderTake);
 
+            List<string> listOfPath = new List<string>();
+
+            if (orderDetail.ImageUpload != null && orderDetail.ImageUpload.Count > 0)
+            {
+                foreach (var item in orderDetail.ImageUpload)
+                {
+                    string imagepath = "/img/default.png";
+
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(item.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        item.CopyTo(stream);
+                    }
+
+                    listOfPath.Add("/img/" + fileName); // для збереження в бд
+                }               
+            }
+
+            var listOfPathSerialize = JsonSerializer.Serialize(listOfPath);
+
             var orderDetailReturn = new OrderDetailReturn
             {
                 orderDetailId = idOrderTake,
                 placeReturnID = orderDetail.idPlace,
                 dataTime_return = DateTime.Now,             
                 isReturning = false,
+                img = listOfPathSerialize,
             };
             content.Add(orderDetailReturn);
 
@@ -132,7 +156,7 @@ namespace Shop.Controllers
             carForUpdate.placeID = orderDetail.idPlace;
             content.Car.Update(carForUpdate);
 
-            content.SaveChanges();
+           content.SaveChanges();
 
             return RedirectToAction("ReturnAuto");
         }

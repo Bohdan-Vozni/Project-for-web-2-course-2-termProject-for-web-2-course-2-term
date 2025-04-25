@@ -14,7 +14,7 @@
                 {
                     <h2 class="rentals-title">Повернення @order.car.name</h2>
                     <div class="rental-card">
-                        <form asp-action="AddOrderDetailReturn" asp-controller="SmartReturn" asp-route-idOrderTake="@order.id" class="return-form" method="post">
+                        <form asp-action="AddOrderDetailReturn" asp-controller="SmartReturn" asp-route-idOrderTake="@order.id" class="return-form" method="post" enctype="multipart/form-data">
                             <img src="@order.car.img" alt="Назва автомобіля" class="car-image">
 
                             <div class="rental-details">
@@ -35,6 +35,12 @@
                                         }
                                     }
                                 </select>
+
+                                <div class="rental-details">
+                                    <label asp-for="ImageUpload">Фото стану автомобіля</label>
+                                    <input asp-for="ImageUpload" type="file" class="form-control" id="img" multiple/>
+                                </div>
+
                             </div>
                             <p>Тест ID місця: @Model.idPlace</p>
 

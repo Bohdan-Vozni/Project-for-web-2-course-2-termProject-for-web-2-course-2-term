@@ -414,5 +414,34 @@ namespace Shop.Controllers
 
             return RedirectToAction("ConfirmReturn");
         }
+
+        
+
+        [HttpGet]
+        public IActionResult GetPhotos(int id)
+        {
+            // Знаходимо повернення за ID
+            var returnOrder = content.OrderDetailReturn
+                .FirstOrDefault(r => r.Id == id);
+
+            if (returnOrder == null || string.IsNullOrWhiteSpace(returnOrder.img))
+            {
+                return Json(new List<string>());
+            }
+
+            try
+            {
+                // Десеріалізуємо JSON-рядок у список рядків
+                var photoPaths = JsonSerializer.Deserialize<List<string>>(returnOrder.img);
+                return Json(photoPaths ?? new List<string>());
+            }
+            catch (JsonException ex)
+            {
+                // Якщо щось пішло не так — повертаємо порожній список
+                Console.WriteLine("Помилка десеріалізації: " + ex.Message);
+                return Json(new List<string>());
+            }
+        }
+
     }
 }

@@ -45,11 +45,15 @@
 
                     </div>
 
+                    <button type="button" class="return-btn show-photos-btn" data-order-id="@order.Id">
+                        Переглянути фото
+                    </button>
+
                     <form asp-action="ConfirmReturn" asp-controller="AdminZone" asp-route-idOrderReturn="@order.Id" method="Post" class="return-form">
                         <button type="submit" class="return-btn">Повернути</button>
                     </form>
 
-                    <form asp-action="ListFunc" asp-controller="SmartReturn" method="Post" class="return-form">
+                    <form asp-action="AdminHome" asp-controller="AdminZone" method="Post" class="return-form">
                         <button type="submit" class="return-btn">Назад</button>
                     </form>
                 </div>
@@ -64,3 +68,90 @@
         </div>
     }
 </div>
+
+
+<!-- Модальне вікно для фото -->
+<div id="photoModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 class="modal-title">Фото автомобіля</h3>
+        <div class="photo-gallery" id="photoContainer">
+            <!-- Фото будуть додані тут -->
+        </div>
+    </div>
+</div>
+
+<script>
+          document.addEventListener('DOMContentLoaded', function() {
+        // Делегування подій для кнопок перегляду фото
+        document.body.addEventListener('click', function(e) {
+            if (e.target.classList.contains('show-photos-btn') ||
+                e.target.closest('.show-photos-btn')) {
+                const btn = e.target.classList.contains('show-photos-btn') ?
+                            e.target : e.target.closest('.show-photos-btn');
+                const orderId = btn.getAttribute('data-order-id');
+                showPhotos(orderId);
+            }
+
+            if (e.target.classList.contains('close')) {
+                closeModal();
+            }
+        });
+
+        // Закриття модального вікна при кліку на затемнений фон
+        document.getElementById('photoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Закриття модального вікна при натисканні ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    });
+
+    function showPhotos(orderId) {
+        fetch(`/AdminZone/GetPhotos?id=${orderId}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Помилка завантаження фото');
+                return response.json();
+            })
+            .then(data => {
+                const container = document.getElementById('photoContainer');
+                container.innerHTML = '';
+
+                if (data && data.length > 0) {
+                    data.forEach(path => {
+                        const imgWrapper = document.createElement('div');
+                        imgWrapper.className = 'photo-item';
+
+                        const img = document.createElement('img');
+                        img.src = path.startsWith('/') ? path : `/img/${path}`;
+                        img.alt = 'Фото автомобіля';
+
+                        imgWrapper.appendChild(img);
+                        container.appendChild(imgWrapper);
+                    });
+                } else {
+                    container.innerHTML = '<p class="no-photos">Фото не знайдено</p>';
+                }
+
+                document.getElementById('photoModal').style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Заборона прокрутки фону
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const container = document.getElementById('photoContainer');
+                container.innerHTML = `<p class="error-message">${error.message}</p>`;
+                document.getElementById('photoModal').style.display = 'block';
+            });
+    }
+
+    function closeModal() {
+        document.getElementById('photoModal').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Відновлення прокрутки
+    }
+</script>

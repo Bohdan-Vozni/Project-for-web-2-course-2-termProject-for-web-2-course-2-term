@@ -1,4 +1,5 @@
-﻿using Shop.Data.interfaces;
+﻿using Microsoft.AspNetCore.Http;
+using Shop.Data.interfaces;
 using Shop.Data.Models;
 using System.Collections.Generic;
 
@@ -12,5 +13,7 @@ namespace Shop.ViewModels
         public IEnumerable<Place> allPlace { get; set; }
 
         public int idPlace { get; set; }
+
+        public List<IFormFile> ImageUpload { get; set; }
     }
 }
