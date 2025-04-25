@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відгуки</title>
+    <link rel="stylesheet" href="~/css/ReviewForSite_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="reviews-container">
+        <h1 class="reviews-title">Відгуки</h1>
+
+        <!-- Форма для залишення відгуку -->
+        <div class="review-form">
+            <h2>Залишити відгук</h2>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="name">Ім'я*</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="review">Ваш відгук*</label>
+                    <textarea id="review" name="review" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Опублікувати</button>
+            </form>
+        </div>
+
+        <!-- Список існуючих відгуків -->
+        <div class="reviews-list">
+            <h2>Відгуки клієнтів</h2>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="review-author">Ірина</span>
+                    <span class="review-date">29.04.2023</span>
+                </div>
+                <div class="review-content">
+                    Менеджер Юрій у Львові – це щось фантастичне: ввічливий, ерудований, чітко пояснює умови оренди, ретельно оформляє документи, дає поради так, аби добре було в першу чергу клієнту, а вже потім компанії. Рідко можна натрапити на такий рівень сервісу.
+                </div>
+                <div class="review-separator"></div>
+            </div>
+
+            <!-- Додаткові відгуки можна додавати тут -->
+        </div>
+    </div>
+
+    <script src="reviews.js"></script>
+</body>
+</html>
+
+
+<script src="~/js/ReviewForSite.js"></script>
