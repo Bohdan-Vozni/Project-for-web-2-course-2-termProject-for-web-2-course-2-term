@@ -4,6 +4,206 @@ main {
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
 }
 
+/*для модального вікна*/
+/* Основні стилі */
+.rentals-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.rentals-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.rentals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.rental-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .rental-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+.car-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.car-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7f8c8d;
+    font-size: 50px;
+    border-bottom: 1px solid #eee;
+}
+
+.rental-details {
+    padding: 20px;
+}
+
+.text-color {
+    color: #34495e;
+    margin: 8px 0;
+}
+
+h3.text-color {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Стилі для кнопок */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: calc(100% - 20px);
+}
+
+.btn-photos {
+    background-color: #3498db;
+    color: white;
+}
+
+    .btn-photos:hover {
+        background-color: #2980b9;
+    }
+
+.btn-confirm {
+    background-color: #2ecc71;
+    color: white;
+}
+
+    .btn-confirm:hover {
+        background-color: #27ae60;
+    }
+
+.btn-back {
+    background-color: #95a5a6;
+    color: white;
+}
+
+    .btn-back:hover {
+        background-color: #7f8c8d;
+    }
+
+.btn i {
+    margin-right: 8px;
+}
+
+/* Стилі для модального вікна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.modal-title {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+    .close:hover {
+        color: #e74c3c;
+    }
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+    .photo-gallery img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+    }
+
+        .photo-gallery img:hover {
+            transform: scale(1.03);
+        }
+
+/* Повідомлення про відсутність авто */
+.no-rentals-message {
+    text-align: center;
+    padding: 50px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+    .no-rentals-message i {
+        font-size: 50px;
+        color: #7f8c8d;
+        margin-bottom: 20px;
+    }
+
+    .no-rentals-message p {
+        font-size: 18px;
+        color: #34495e;
+    }
+
+/**/
 .text-color{
     color: black;
 }
