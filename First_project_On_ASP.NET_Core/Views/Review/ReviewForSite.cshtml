@@ -1,61 +1,65 @@
-﻿<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Відгуки</title>
-    <link rel="stylesheet" href="~/css/ReviewForSite_style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <div class="reviews-container">
-        <h1 class="reviews-title">Відгуки</h1>
+﻿
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Відгуки</title>
+<link rel="stylesheet" href="~/css/ReviewForSite_style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+@model ReviewForSiteViewModel
 
-        <!-- Форма для залишення відгуку -->
-        <div class="review-form">
-            <h2>Залишити відгук</h2>
-            <form id="feedbackForm">
-                <div class="form-group">
-                    <label for="name">Ім'я*</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+<div class="reviews-container">
+    <h1 class="reviews-title">Відгуки</h1>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
-                </div>
-
-                <div class="form-group">
-                    <label for="review">Ваш відгук*</label>
-                    <textarea id="review" name="review" rows="5" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Опублікувати</button>
-            </form>
-        </div>
-
-        <!-- Список існуючих відгуків -->
-        <div class="reviews-list">
-            <h2>Відгуки клієнтів</h2>
-
-            <div class="review-item">
-                <div class="review-header">
-                    <span class="review-author">Ірина</span>
-                    <span class="review-date">29.04.2023</span>
-                </div>
-                <div class="review-content">
-                    Менеджер Юрій у Львові – це щось фантастичне: ввічливий, ерудований, чітко пояснює умови оренди, ретельно оформляє документи, дає поради так, аби добре було в першу чергу клієнту, а вже потім компанії. Рідко можна натрапити на такий рівень сервісу.
-                </div>
-                <div class="review-separator"></div>
+    <!-- Форма для залишення відгуку -->
+    <div class="review-form">
+        <h2>Залишити відгук</h2>
+        <form asp-action="ReviewForSite" asp-controller="Review" method="post" id="feedbackForm">
+            <div class="form-group">
+                <label asp-for="Review.name" for="name">Ім'я*</label>
+                <input asp-for="Review.name" type="text" id="name"  required>
+                <span asp-validation-for="Review.name" class="text-danger"></span>
             </div>
 
-            <!-- Додаткові відгуки можна додавати тут -->
-        </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Review.response">Ваш відгук*</label>
+                <textarea asp-for="Review.response"  id="review"  rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Опублікувати</button>
+        </form>
     </div>
 
-    <script src="reviews.js"></script>
-</body>
-</html>
+    <!-- Список існуючих відгуків -->
+    <div class="reviews-list">
+        <h2>Відгуки клієнтів</h2>
+        @{
+            if ( Model != null && Model.listReviews.Any() && Model.listReviews != null)
+            {
+                foreach (var item in Model.listReviews)
+                {
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="review-author">@item.name</span>
+                            <span class="review-date">@item.timeSend</span>
+                        </div>
+                        <div class="review-content">
+                            @item.response
+                        </div>
+                        <div class="review-separator"> </div>
+                    </div>
+                }
+                
+            }
+           
+        }
+        
 
+        <!-- Додаткові відгуки можна додавати тут -->
+    </div>
+</div>
 
-<script src="~/js/ReviewForSite.js"></script>
+@* <script src="~/js/ReviewForSite.js"></script> *@
