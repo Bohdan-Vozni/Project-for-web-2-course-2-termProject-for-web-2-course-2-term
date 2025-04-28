@@ -229,8 +229,14 @@ namespace Shop.Migrations
                     b.Property<int>("grade")
                         .HasColumnType("int");
 
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("response")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("timeSend")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("userId")
                         .HasColumnType("int");

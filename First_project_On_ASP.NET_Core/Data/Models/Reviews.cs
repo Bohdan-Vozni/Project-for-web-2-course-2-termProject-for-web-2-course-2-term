@@ -1,4 +1,7 @@
-﻿namespace Shop.Data.Models
+﻿using Microsoft.VisualBasic;
+using System;
+
+namespace Shop.Data.Models
 {
     public class Reviews
     {
@@ -12,6 +15,9 @@
 
         public string response { get; set; }
 
+        public string name { get; set; }
+
+        public DateTime timeSend { get; set; }
 
     }
 }
