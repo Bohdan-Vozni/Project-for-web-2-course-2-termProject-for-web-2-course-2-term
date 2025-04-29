@@ -1,0 +1,46 @@
+﻿
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Відгуки</title>
+<link rel="stylesheet" href="~/css/ReviewForSite_style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+@model ReviewForSiteViewModel
+
+<div class="reviews-container">
+    <h1 class="reviews-title">Ваші відгуки</h1>
+
+
+    <!-- Список існуючих відгуків -->
+    <div class="reviews-list">
+        
+        @{
+            if (Model != null && Model.listReviews.Any() && Model.listReviews != null)
+            {
+                foreach (var item in Model.listReviews)
+                {
+                    <form asp-action="ChangeReview" asp-controller="Review" method="post">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="review-author">@item.name</span>
+                                <span class="review-date">@item.timeSend.ToString("g")</span>
+                            </div>
+                            <div class="review-content">
+                                @item.response
+                            </div>
+                            <div class="review-edit">
+                                <input type="hidden" name="idReview" value="@item.Id" />
+                                <input asp-for="Review.response" type="text" class="review-content" placeholder="Новий текст відгуку" />
+                            </div>
+                            <div class="review-separator"></div>
+                            <button type="submit" class="submit-btn">Змінити відгук</button>
+                        </div>
+                    </form>
+                }
+
+            }
+
+        }
+
+
+        <!-- Додаткові відгуки можна додавати тут -->
+    </div>

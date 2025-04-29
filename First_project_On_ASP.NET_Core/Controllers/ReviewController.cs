@@ -6,6 +6,7 @@ using Shop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text.Json;
 
 namespace Shop.Controllers
@@ -67,6 +68,58 @@ namespace Shop.Controllers
             };
 
             return View(modelForRetutn);
+        }
+
+        [HttpGet]
+        public IActionResult ChangeReview()
+        {
+            var user = HttpContext.Session.GetString("User");
+   
+            var userDeSerialise = JsonSerializer.Deserialize<User>(user);
+
+
+
+            List<Reviews> listReviews = content.Reviews
+                .OrderByDescending(c => c.timeSend)
+                .Where(c => c.userId == userDeSerialise.id)
+                .ToList();
+
+            var modelForRetutn = new ReviewForSiteViewModel()
+            {
+                listReviews = listReviews
+            };
+
+            return View(modelForRetutn);
+        }
+
+        [HttpPost]
+        public IActionResult ChangeReview(ReviewForSiteViewModel model, int idReview)
+        {
+            var user = HttpContext.Session.GetString("User");
+   
+            var userDeSerialise = JsonSerializer.Deserialize<User>(user);
+
+            var reviewsForUpdate = content.Reviews.FirstOrDefault(c => c.Id == idReview && c.userId == userDeSerialise.id);
+
+            reviewsForUpdate.response = model.Review.response;
+
+            content.Reviews.Update(reviewsForUpdate);
+            content.SaveChanges();
+
+
+            List<Reviews> listReviews = content.Reviews
+                .OrderByDescending(c => c.timeSend)
+                .Where(c => c.userId == userDeSerialise.id)
+                .ToList();
+
+            var modelForRetutn = new ReviewForSiteViewModel()
+            {
+                listReviews = listReviews,
+                
+
+            };
+
+            return RedirectToAction("ChangeReview");
         }
     }
 }
