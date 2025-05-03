@@ -32,8 +32,9 @@ main {
     padding: 40px;
     text-align: center;
     display: inline-block;
-    text-align: center;
+    align-content: center;
 }
+
 
     .img-thumbnail {
         width: 210px; /* фіксована ширина */

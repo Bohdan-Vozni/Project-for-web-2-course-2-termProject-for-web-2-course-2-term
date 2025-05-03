@@ -37,7 +37,18 @@
             <li><a href="/Cars/List" class="nav-link px-2 text-white">Всі автмобілі</a></li>
             <li><a href="/Cars/List/electro" class="nav-link px-2 text-white">Електро</a></li>
             <li><a href="/Cars/List/fuel" class="nav-link px-2 text-white">Бензинові</a></li>
-            <li><a href="/SmartReturn/ListFunc" class="nav-link px-2 text-white">Розумне повернення</a></li>
+            <li class="smart-return_link">
+                <a href="/SmartReturn/ListFunc" class="nav-link px-2 text-white">Розумне повернення</a>
+                <div class="smart-return_popup">
+                    <form asp-action="ReturnAuto" asp-controller="SmartReturn" method="Get">
+                        <button type="submit" class="btn">Поверути авто</button>
+                    </form>
+
+                    <form asp-action="CheckReturnAuto" asp-controller="SmartReturn" method="Get">
+                        <button class="btn">Переглянути статус повернення</button>
+                    </form>
+                </div>
+                </li>
             <li><a href="/Review/ReviewForSite" class="nav-link px-2 text-white">Відгуки</a></li>
 
             @if (user != null)
@@ -54,7 +65,26 @@
 
                 if (deserializeUser.isAdmin)
                 {
-                    <li><a href="/AdminZone/AdminHome" class="nav-link px-2 text-white">Admin</a></li>
+                    <li class="admin_link">
+                        <a href="/AdminZone/AdminHome" class="nav-link px-2 text-white">Admin</a>
+                        <div class="admin_popup">
+                            <form asp-action="FindAutoForChange" asp-controller="AdminZone" method="Get">
+                                <button type="submit" class="btn">Змінити інформацію про автомобіль</button>
+                            </form>
+
+                            <form asp-controller="AdminZone" asp-action="AddAuto" method="Get">
+                                <button type="submit" class="btn">Додати автомобіль</button>
+                            </form>
+
+                            <form asp-controller="AdminZone" asp-action="FindAutoForDelete" method="Get">
+                                <button type="submit" class="btn">Видалити автомобіль</button>
+                            </form>
+
+                            <form asp-controller="AdminZone" asp-action="ConfirmReturn" method="Get">
+                                <button type="submit" class="btn">Підтвердити повернення</button>
+                            </form>
+                        </div>
+                    </li>
                 }            
             }
                 
