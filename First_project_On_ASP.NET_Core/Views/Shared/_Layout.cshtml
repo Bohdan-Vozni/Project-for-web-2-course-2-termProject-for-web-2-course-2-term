@@ -38,7 +38,7 @@
             <li><a href="/Cars/List/electro" class="nav-link px-2 text-white">Електро</a></li>
             <li><a href="/Cars/List/fuel" class="nav-link px-2 text-white">Бензинові</a></li>
             <li class="smart-return_link">
-                <a href="/SmartReturn/ListFunc" class="nav-link px-2 text-white">Розумне повернення</a>
+                <a class="nav-link px-2 text-white">Розумне повернення</a>
                 <div class="smart-return_popup">
                     <form asp-action="ReturnAuto" asp-controller="SmartReturn" method="Get">
                         <button type="submit" class="btn">Поверути авто</button>
@@ -66,7 +66,7 @@
                 if (deserializeUser.isAdmin)
                 {
                     <li class="admin_link">
-                        <a href="/AdminZone/AdminHome" class="nav-link px-2 text-white">Admin</a>
+                        <a  class="nav-link px-2 text-white">Admin</a>
                         <div class="admin_popup">
                             <form asp-action="FindAutoForChange" asp-controller="AdminZone" method="Get">
                                 <button type="submit" class="btn">Змінити інформацію про автомобіль</button>
