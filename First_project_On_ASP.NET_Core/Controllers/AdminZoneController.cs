@@ -31,7 +31,7 @@ namespace Shop.Controllers
             _allCars = allCars;
             _allPlace = allPlace;
         }
-        public IActionResult AdminHome()
+        public IActionResult Admins()
         {
             return View();
         }
@@ -238,7 +238,9 @@ namespace Shop.Controllers
             content.Car.Update(carForUpdate);
             content.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index","Home");
+
         }
 
 
@@ -390,7 +392,7 @@ namespace Shop.Controllers
 
             if (string.IsNullOrEmpty(user))
             {
-                return RedirectToAction("AdminHome", "Account"); 
+                return RedirectToAction("Index", "Home"); 
             }
             var userDeserialize = JsonSerializer.Deserialize<User>(user);
 
