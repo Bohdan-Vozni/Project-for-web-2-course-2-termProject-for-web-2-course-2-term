@@ -81,7 +81,7 @@ namespace Shop.Controllers
             content.Car.Add(car);
             content.SaveChanges();
 
-            return RedirectToAction("AdminHome");
+            return RedirectToAction("Index","Home");
         }
 
         [HttpGet]
@@ -238,7 +238,7 @@ namespace Shop.Controllers
             content.Car.Update(carForUpdate);
             content.SaveChanges();
 
-            return RedirectToAction("AdminHome");
+            return RedirectToAction("Index", "Home");
         }
 
 

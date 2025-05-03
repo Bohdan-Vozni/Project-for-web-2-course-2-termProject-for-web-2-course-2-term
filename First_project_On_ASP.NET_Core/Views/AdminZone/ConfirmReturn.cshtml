@@ -49,11 +49,11 @@
                         Переглянути фото
                     </button>
 
-                    <form asp-action="ConfirmReturn" asp-controller="AdminZone" asp-route-idOrderReturn="@order.Id" method="Post" class="return-form">
+                    <form asp-action="Index" asp-controller="Home" asp-route-idOrderReturn="@order.Id" method="Post" class="return-form">
                         <button type="submit" class="return-btn">Повернути</button>
                     </form>
 
-                    <form asp-action="AdminHome" asp-controller="AdminZone" method="Post" class="return-form">
+                    <form asp-action="List" asp-controller="Cars" method="Post" class="return-form">
                         <button type="submit" class="return-btn">Назад</button>
                     </form>
                 </div>
