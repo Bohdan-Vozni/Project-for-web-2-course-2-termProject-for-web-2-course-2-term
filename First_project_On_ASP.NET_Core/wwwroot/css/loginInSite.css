@@ -8,7 +8,7 @@ html, body {
     height: 100%;
     background: linear-gradient(135deg, #74ebd5, #ACB6E5);
     font-family: 'Segoe UI', sans-serif;
-    overflow-x: hidden; /* Вимикає горизонтальний скрол */
+    overflow-x: hidden;
 }
 
 body {
@@ -21,6 +21,7 @@ body {
 .login-container {
     width: 100%;
     max-width: 400px;
+    min-width: 400px;
     background: white;
     padding: 30px;
     border-radius: 12px;
@@ -28,12 +29,20 @@ body {
     animation: fadeInUp 1s ease-out;
 }
 
+.login-box {
+    width: 100%;
+}
+
 .login-box h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 8px;
     color: #0d6efd;
     font-size: 28px;
     font-weight: bold;
+}
+
+.form-group {
+    width: 100%;
 }
 
 input.form-controlLogin {
@@ -42,40 +51,38 @@ input.form-controlLogin {
     border-radius: 6px;
     border: 1px solid #ccc;
     width: 100%;
+    margin-bottom: 10px;
+    height: 40px;
+    box-sizing: border-box; 
 }
 
-    input.form-control:focus {
-        border-color: #0d6efd;
-        box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
-    }
+input.form-controlLogin:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+    width: 100%;
+}
 
 button.btnLogin {
     width: 100%;
     padding: 10px;
-    margin: 10px;
     font-size: 16px;
     border-radius: 6px;
     background-color: #0d6efd;
     color: white;
     border: none;
+    margin-top: 20px;
     transition: background-color 0.3s ease;
-    justify-content: center;
+    cursor: pointer;
 }
 
-    button.btn:hover {
-        background-color: #0b5ed7;
-    }
-
-button.btnLogin {
-    margin-left: 0px;
-    margin-right: 0px;
-    
+button.btnLogin:hover {
+    background-color: #0b5ed7;
 }
 
 .text-danger {
     color: palevioletred;
 }
-/* Анімації */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;

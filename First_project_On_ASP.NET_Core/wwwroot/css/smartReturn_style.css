@@ -135,33 +135,37 @@ main {
 
 .return-form {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
-.return-btn {
+.return-btn {  
     width: 100%;
-    padding: 12px 0;
+    padding: 14px 0;
     border: none;
-    border-radius: 8px;
-    background: linear-gradient(to right, #e74c3c, #c0392b);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e74c3c, #b03a2e);
     color: white;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.05rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-    letter-spacing: 0.5px;
+    box-shadow: 0 6px 18px rgba(231, 76, 60, 0.35);
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
 }
 
     .return-btn:hover {
-        background: linear-gradient(to right, #c0392b, #a5281b);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        background: linear-gradient(135deg, #c0392b, #922b21);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(231, 76, 60, 0.45);
     }
 
     .return-btn:active {
-        transform: translateY(0);
+        transform: translateY(1px) scale(0.98);
+        box-shadow: 0 3px 10px rgba(192, 57, 43, 0.4);
     }
+
 
 .no-rentals-message {
     text-align: center;
