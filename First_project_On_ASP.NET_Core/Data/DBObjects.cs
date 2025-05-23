@@ -134,9 +134,15 @@ namespace Shop.Data
                 {
                     var list = new Place[]
                     {
-                        new Place { placeName = "ВДНГ", address = "ВДНГ", desc = "Станція метро Виставковий центр" },
-                        new Place { placeName = "Іподром", address = "Іпродом", desc = "Станція метро іподром" }
+                        new Place { placeName = "ВДНГ", address = "вул. Академіка Глушкова 1", desc = "Станція метро Виставковий центр" },
+                        new Place { placeName = "Іподром", address = "проспект Академіка Глушкова", desc = "Станція метро Іподром" },
+                        new Place { placeName = "Теремки", address = "проспект Академіка Глушкова", desc = "Станція метро Теремки" },
+                        new Place { placeName = "Либідська", address = "вул. Антоновича", desc = "Станція метро Либідська" },
+                        new Place { placeName = "Палац Україна", address = "вул. Велика Васильківська 103", desc = "Станція метро Палац Україна" },
+                        new Place { placeName = "Олімпійська", address = "вул. Велика Васильківська", desc = "Станція метро Олімпійська" },
+                        new Place { placeName = "Університет", address = "вул. Володимирська", desc = "Станція метро Університет" }
                     };
+
 
 
                     place = new Dictionary<string, Place>();
